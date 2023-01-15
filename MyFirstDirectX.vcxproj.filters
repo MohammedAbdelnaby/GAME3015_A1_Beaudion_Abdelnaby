@@ -16,60 +16,74 @@
     <Filter Include="Common">
       <UniqueIdentifier>{78d3e248-a5ab-48f3-a921-950f14b94a77}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{c5ea0f7c-78dd-43a2-be05-c21f9b1fb81b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BoxApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Common\Camera.cpp">
-      <Filter>Common</Filter>
+    <ClCompile Include="Common\Camera.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Common\d3dApp.cpp">
-      <Filter>Common</Filter>
+    <ClCompile Include="Common\d3dApp.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Common\d3dUtil.cpp">
-      <Filter>Common</Filter>
+    <ClCompile Include="Common\d3dUtil.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Common\DDSTextureLoader.cpp">
-      <Filter>Common</Filter>
+    <ClCompile Include="Common\DDSTextureLoader.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Common\GameTimer.cpp">
-      <Filter>Common</Filter>
+    <ClCompile Include="Common\GameTimer.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Common\GeometryGenerator.cpp">
-      <Filter>Common</Filter>
+    <ClCompile Include="Common\GeometryGenerator.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Common\MathHelper.cpp">
-      <Filter>Common</Filter>
+    <ClCompile Include="Common\MathHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Game.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Common\Camera.h">
-      <Filter>Common</Filter>
+    <FxCompile Include="Shaders\color.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Common\Camera.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Common\d3dApp.h">
-      <Filter>Common</Filter>
+    <ClInclude Include="Common\d3dApp.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Common\d3dUtil.h">
-      <Filter>Common</Filter>
+    <ClInclude Include="Common\d3dUtil.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Common\d3dx12.h">
-      <Filter>Common</Filter>
+    <ClInclude Include="Common\d3dx12.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Common\DDSTextureLoader.h">
-      <Filter>Common</Filter>
+    <ClInclude Include="Common\DDSTextureLoader.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Common\GameTimer.h">
-      <Filter>Common</Filter>
+    <ClInclude Include="Common\GameTimer.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Common\GeometryGenerator.h">
-      <Filter>Common</Filter>
+    <ClInclude Include="Common\GeometryGenerator.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Common\MathHelper.h">
-      <Filter>Common</Filter>
+    <ClInclude Include="Common\MathHelper.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Common\UploadBuffer.h">
-      <Filter>Common</Filter>
+    <ClInclude Include="Common\UploadBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Game.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
