@@ -21,7 +21,24 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BoxApp.cpp">
+    <FxCompile Include="Shaders\color.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Default.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\LightingUtil.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\PS.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\VS.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Common\Aircraft.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Common\Camera.cpp">
@@ -36,25 +53,41 @@
     <ClCompile Include="Common\DDSTextureLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Common\Entity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\FrameResource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Common\GameTimer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Common\GeometryGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Common\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Common\MathHelper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Game.cpp">
+    <ClCompile Include="Common\SceneNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\SpriteNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\World.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Shaders\color.hlsl">
-      <Filter>Shaders</Filter>
-    </FxCompile>
-  </ItemGroup>
-  <ItemGroup>
+    <ClInclude Include="Common\Aircraft.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="Common\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -70,6 +103,18 @@
     <ClInclude Include="Common\DDSTextureLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Common\Entity.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\FrameResource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Game.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="Common\GameTimer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -79,10 +124,16 @@
     <ClInclude Include="Common\MathHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Common\SceneNode.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\SpriteNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="Common\UploadBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Game.h">
+    <ClInclude Include="Common\World.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
