@@ -9,6 +9,9 @@ public:
 	explicit							World(Game* window);
 	void								update(const GameTimer& gt);
 	void								draw();
+	void								HandleInputUpdate();
+	void								ScrollBackground();
+	void								UpdateEnemies();
 
 	//void								loadTextures();
 	void								buildScene();
@@ -32,7 +35,8 @@ private:
 	XMFLOAT4							mWorldBounds;
 	XMFLOAT2		    				mSpawnPosition;
 	float								mScrollSpeed;
+	float								mEnemySpeed;
 	Aircraft*							mPlayerAircraft;
 	SpriteNode*							mBackground;
-	Aircraft*							mEnemy;
+	std::list<Aircraft*>				mEnemies;
 };

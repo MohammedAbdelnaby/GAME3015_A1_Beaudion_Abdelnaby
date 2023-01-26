@@ -185,51 +185,50 @@ void Game::OnMouseMove(WPARAM btnState, int x, int y)
 void Game::OnKeyboardInput(const GameTimer& gt)
 {
 	const float dt = gt.DeltaTime();
-
 	mCamera.GetLook();
 	float tmin = 0;
 	float buffer = 0.5;
 	XMFLOAT3  oppositef3(-1, -1, -1);
 	XMVECTOR opposite = XMLoadFloat3(&oppositef3);
 
-	if (GetAsyncKeyState('W') & 0x8000)
-	{
-		bool hit = false;
+	//if (GetAsyncKeyState('W') & 0x8000)
+	//{
+	//	bool hit = false;
 
-		if (!hit)
-		{
-			mCamera.Walk(10.0f * dt);
+	//	if (!hit)
+	//	{
+	//		mCamera.Walk(10.0f * dt);
 
-		}
-	}
+	//	}
+	//}
 
-	if (GetAsyncKeyState('S') & 0x8000)
-	{
-		bool hit = false;
-		if (!hit)
-		{
-			mCamera.Walk(-10.0f * dt);
-		}
+	//if (GetAsyncKeyState('S') & 0x8000)
+	//{
+	//	bool hit = false;
+	//	if (!hit)
+	//	{
+	//		mCamera.Walk(-10.0f * dt);
+	//	}
 
-	}
-	if (GetAsyncKeyState('A') & 0x8000)
-	{
-		bool hit = false;
-		if (!hit)
-		{
-			mCamera.Strafe(-10.0f * dt);
-		}
+	//}
+	//if (GetAsyncKeyState('A') & 0x8000)
+	//{
+	//	bool hit = false;
+	//	if (!hit)
+	//	{
+	//		mCamera.Strafe(-10.0f * dt);
+	//	}
 
 
-	}
-	if (GetAsyncKeyState('D') & 0x8000)
-	{
-		bool hit = false;
-		if (!hit)
-		{
-			mCamera.Strafe(10.0f * dt);
-		}
-	}
+	//}
+	//if (GetAsyncKeyState('D') & 0x8000)
+	//{
+	//	bool hit = false;
+	//	if (!hit)
+	//	{
+	//		mCamera.Strafe(10.0f * dt);
+	//	}
+	//}
 
 
 	mCamera.UpdateViewMatrix();
@@ -346,34 +345,34 @@ void Game::UpdateMainPassCB(const GameTimer& gt)
 void Game::LoadTextures()
 {
 	//Eagle
-	auto EagleTex = std::make_unique<Texture>();
-	EagleTex->Name = "EagleTex";
-	EagleTex->Filename = L"Textures/Eagle.dds";
+	auto PlayerShip = std::make_unique<Texture>();
+	PlayerShip->Name = "PlayerShip";
+	PlayerShip->Filename = L"Textures/PlayerShip.dds";
 	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-		mCommandList.Get(), EagleTex->Filename.c_str(),
-		EagleTex->Resource, EagleTex->UploadHeap));
+		mCommandList.Get(), PlayerShip->Filename.c_str(),
+		PlayerShip->Resource, PlayerShip->UploadHeap));
 
-	mTextures[EagleTex->Name] = std::move(EagleTex);
+	mTextures[PlayerShip->Name] = std::move(PlayerShip);
 
 	//Raptor
-	auto RaptorTex = std::make_unique<Texture>();
-	RaptorTex->Name = "RaptorTex";
-	RaptorTex->Filename = L"Textures/Raptor.dds";
+	auto EnemyShip = std::make_unique<Texture>();
+	EnemyShip->Name = "EnemyShip";
+	EnemyShip->Filename = L"Textures/EnemyShip.dds";
 	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-		mCommandList.Get(), RaptorTex->Filename.c_str(),
-		RaptorTex->Resource, RaptorTex->UploadHeap));
+		mCommandList.Get(), EnemyShip->Filename.c_str(),
+		EnemyShip->Resource, EnemyShip->UploadHeap));
 
-	mTextures[RaptorTex->Name] = std::move(RaptorTex);
+	mTextures[EnemyShip->Name] = std::move(EnemyShip);
 
 	//Desert
-	auto DesertTex = std::make_unique<Texture>();
-	DesertTex->Name = "DesertTex";
-	DesertTex->Filename = L"Textures/Desert.dds";
+	auto Background = std::make_unique<Texture>();
+	Background->Name = "Background";
+	Background->Filename = L"Textures/Background.dds";
 	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-		mCommandList.Get(), DesertTex->Filename.c_str(),
-		DesertTex->Resource, DesertTex->UploadHeap));
+		mCommandList.Get(), Background->Filename.c_str(),
+		Background->Resource, Background->UploadHeap));
 
-	mTextures[DesertTex->Name] = std::move(DesertTex);
+	mTextures[Background->Name] = std::move(Background);
 }
 
 void Game::BuildRootSignature()
@@ -436,9 +435,9 @@ void Game::BuildDescriptorHeaps()
 	//
 	CD3DX12_CPU_DESCRIPTOR_HANDLE hDescriptor(mSrvDescriptorHeap->GetCPUDescriptorHandleForHeapStart());
 
-	auto EagleTex = mTextures["EagleTex"]->Resource;
-	auto RaptorTex = mTextures["RaptorTex"]->Resource;
-	auto DesertTex = mTextures["DesertTex"]->Resource;
+	auto EagleTex = mTextures["PlayerShip"]->Resource;
+	auto RaptorTex = mTextures["EnemyShip"]->Resource;
+	auto DesertTex = mTextures["Background"]->Resource;
 
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
 

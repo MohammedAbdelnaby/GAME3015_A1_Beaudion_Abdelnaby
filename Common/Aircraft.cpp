@@ -20,7 +20,10 @@ Aircraft::Aircraft(Type type, Game* game) : Entity(game)
 
 void Aircraft::drawCurrent() const
 {	
+	
 }
+
+
 
 void Aircraft::buildCurrent()
 {
@@ -36,4 +39,6 @@ void Aircraft::buildCurrent()
 	renderer->BaseVertexLocation = renderer->Geo->DrawArgs["box"].BaseVertexLocation;
 
 	game->getRenderItems().push_back(std::move(render));
+
+	//setVelocity(1.0f, 1.0f);
 }
