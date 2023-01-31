@@ -1,3 +1,8 @@
+/*
+* Names: Mohammed , Sam
+* Date: 2023-01-30
+* Last Modified: 2023-01-30
+*/
 #include "Entity.hpp"
 
 Entity::Entity(Game* game) : SceneNode(game), mVelocity(0, 0, 0)
