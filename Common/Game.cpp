@@ -344,7 +344,7 @@ void Game::UpdateMainPassCB(const GameTimer& gt)
 
 void Game::LoadTextures()
 {
-	//Eagle
+	//Player
 	auto PlayerShip = std::make_unique<Texture>();
 	PlayerShip->Name = "PlayerShip";
 	PlayerShip->Filename = L"Textures/PlayerShip.dds";
@@ -354,7 +354,7 @@ void Game::LoadTextures()
 
 	mTextures[PlayerShip->Name] = std::move(PlayerShip);
 
-	//Raptor
+	//Enemy
 	auto EnemyShip = std::make_unique<Texture>();
 	EnemyShip->Name = "EnemyShip";
 	EnemyShip->Filename = L"Textures/EnemyShip.dds";
@@ -363,6 +363,7 @@ void Game::LoadTextures()
 		EnemyShip->Resource, EnemyShip->UploadHeap));
 
 	mTextures[EnemyShip->Name] = std::move(EnemyShip);
+
 
 	//Desert
 	auto Background = std::make_unique<Texture>();
@@ -373,6 +374,16 @@ void Game::LoadTextures()
 		Background->Resource, Background->UploadHeap));
 
 	mTextures[Background->Name] = std::move(Background);
+
+	//Planet
+	auto Planet = std::make_unique<Texture>();
+	Planet->Name = "Planet";
+	Planet->Filename = L"Textures/Planet.dds";
+	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
+		mCommandList.Get(), Planet->Filename.c_str(),
+		Planet->Resource, Planet->UploadHeap));
+	
+	mTextures[Planet->Name] = std::move(Planet);
 }
 
 void Game::BuildRootSignature()
@@ -425,7 +436,7 @@ void Game::BuildDescriptorHeaps()
 	// Create the SRV heap.
 	//
 	D3D12_DESCRIPTOR_HEAP_DESC srvHeapDesc = {};
-	srvHeapDesc.NumDescriptors = 3;
+	srvHeapDesc.NumDescriptors = 4;
 	srvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
 	srvHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
 	ThrowIfFailed(md3dDevice->CreateDescriptorHeap(&srvHeapDesc, IID_PPV_ARGS(&mSrvDescriptorHeap)));
@@ -438,6 +449,7 @@ void Game::BuildDescriptorHeaps()
 	auto EagleTex = mTextures["PlayerShip"]->Resource;
 	auto RaptorTex = mTextures["EnemyShip"]->Resource;
 	auto DesertTex = mTextures["Background"]->Resource;
+	auto PlanetTex = mTextures["Planet"]->Resource;
 
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
 
@@ -472,6 +484,11 @@ void Game::BuildDescriptorHeaps()
 	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
 	srvDesc.Format = DesertTex->GetDesc().Format;
 	md3dDevice->CreateShaderResourceView(DesertTex.Get(), &srvDesc, hDescriptor);
+	
+	//Planet Descriptor
+	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
+	srvDesc.Format = PlanetTex->GetDesc().Format;
+	md3dDevice->CreateShaderResourceView(PlanetTex.Get(), &srvDesc, hDescriptor);
 
 }
 
@@ -583,25 +600,25 @@ void Game::BuildFrameResources()
 //step13
 void Game::BuildMaterials()
 {
-	auto Eagle = std::make_unique<Material>();
-	Eagle->Name = "Eagle";
-	Eagle->MatCBIndex = 0;
-	Eagle->DiffuseSrvHeapIndex = 0;
-	Eagle->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	Eagle->FresnelR0 = XMFLOAT3(0.05f, 0.05f, 0.05f);
-	Eagle->Roughness = 0.2f;
+	auto Player = std::make_unique<Material>();
+	Player->Name = "Player";
+	Player->MatCBIndex = 0;
+	Player->DiffuseSrvHeapIndex = 0;
+	Player->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	Player->FresnelR0 = XMFLOAT3(0.05f, 0.05f, 0.05f);
+	Player->Roughness = 0.2f;
 
-	mMaterials["Eagle"] = std::move(Eagle);
+	mMaterials["Player"] = std::move(Player);
 
-	auto Raptor = std::make_unique<Material>();
-	Raptor->Name = "Raptor";
-	Raptor->MatCBIndex = 1;
-	Raptor->DiffuseSrvHeapIndex = 1;
-	Raptor->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	Raptor->FresnelR0 = XMFLOAT3(0.05f, 0.05f, 0.05f);
-	Raptor->Roughness = 0.2f;
+	auto Enemy = std::make_unique<Material>();
+	Enemy->Name = "Enemy";
+	Enemy->MatCBIndex = 1;
+	Enemy->DiffuseSrvHeapIndex = 1;
+	Enemy->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	Enemy->FresnelR0 = XMFLOAT3(0.05f, 0.05f, 0.05f);
+	Enemy->Roughness = 0.2f;
 
-	mMaterials["Raptor"] = std::move(Raptor);
+	mMaterials["Enemy"] = std::move(Enemy);
 
 	auto Desert = std::make_unique<Material>();
 	Desert->Name = "Desert";
@@ -612,6 +629,16 @@ void Game::BuildMaterials()
 	Desert->Roughness = 0.2f;
 
 	mMaterials["Desert"] = std::move(Desert);
+
+	auto Planet = std::make_unique<Material>();
+	Planet->Name = "Planet";
+	Planet->MatCBIndex = 3;
+	Planet->DiffuseSrvHeapIndex = 3;
+	Planet->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	Planet->FresnelR0 = XMFLOAT3(0.05f, 0.05f, 0.05f);
+	Planet->Roughness = 0.2f;
+
+	mMaterials["Planet"] = std::move(Planet);
 
 }
 

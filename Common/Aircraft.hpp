@@ -8,8 +8,8 @@ class Aircraft :
 public:
 	enum Type
 	{
-		Eagle,
-		Raptor,
+		Player,
+		Enemy,
 	};
 
 

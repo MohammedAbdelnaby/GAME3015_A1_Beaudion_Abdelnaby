@@ -37,6 +37,6 @@ private:
 	float								mScrollSpeed;
 	float								mEnemySpeed;
 	Aircraft*							mPlayerAircraft;
-	SpriteNode*							mBackground;
+	SpriteNode*							mBackground,*mWorld;
 	std::list<Aircraft*>				mEnemies;
 };

@@ -6,14 +6,14 @@ Aircraft::Aircraft(Type type, Game* game) : Entity(game)
 {
 	switch (type)
 	{
-	case (Eagle):
-		mSprite = "Eagle";
+	case (Player):
+		mSprite = "Player";
 		break;
-	case (Raptor):
-		mSprite = "Raptor";
+	case (Enemy):
+		mSprite = "Enemy";
 		break;
 	default:
-		mSprite = "Eagle";
+		mSprite = "Enemy";
 		break;
 	}
 }
@@ -22,7 +22,6 @@ void Aircraft::drawCurrent() const
 {	
 	
 }
-
 
 
 void Aircraft::buildCurrent()
@@ -40,5 +39,4 @@ void Aircraft::buildCurrent()
 
 	game->getRenderItems().push_back(std::move(render));
 
-	//setVelocity(1.0f, 1.0f);
 }
