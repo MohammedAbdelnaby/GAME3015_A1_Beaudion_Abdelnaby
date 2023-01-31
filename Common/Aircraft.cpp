@@ -28,6 +28,42 @@ void Aircraft::drawCurrent() const
 	
 }
 
+void Aircraft::updateCurrent(const GameTimer& gt)
+{
+	Entity::updateCurrent(gt);
+
+	// Enemy Update
+	if (mType == Type::Enemy)
+	{
+		if (getWorldPosition().x <= -4.0)
+		{
+			setPosition(rand() % 10 + 6, 0.1, 1.7 - (rand() % 34) / 10);
+		}
+	}
+
+	// Player Update
+	if (mType == Type::Player)
+	{
+		setVelocity(0.0f, 0.0f, 0.0f);
+
+		if (GetAsyncKeyState('W') & 0x8000)
+		{
+			setVelocity(0.0f, 0.0f, 1.0f);
+		}
+		if (GetAsyncKeyState('S') & 0x8000)
+		{
+			setVelocity(0.0f, 0.0f, -1.0f);
+		}
+		if (GetAsyncKeyState('D') & 0x8000)
+		{
+			setVelocity(1.0f, 0.0f, 0.0f);
+		}
+		if (GetAsyncKeyState('A') & 0x8000)
+		{
+			setVelocity(-1.0f, 0.0f, 0.0f);
+		}
+	}
+}
 
 void Aircraft::buildCurrent()
 {

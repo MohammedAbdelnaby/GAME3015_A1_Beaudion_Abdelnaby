@@ -23,6 +23,7 @@ public:
 
 
 private:
+	void				updateCurrent(const GameTimer& gt) override;
 	virtual void		drawCurrent() const;
 	virtual void		buildCurrent();
 

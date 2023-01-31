@@ -15,63 +15,27 @@ World::World(Game* game)
 	, mWorldBounds(-1.5f, 1.5f, 200.0f, 0.0f) //Left, Right, Down, Up
 	, mSpawnPosition(0.f, 0.f)
 	, mScrollSpeed(1.0f)
-	, mEnemySpeed(7)
+	, mEnemySpeed(5)
 {
 }
 
 void World::update(const GameTimer& gt)
 {
-	HandleInputUpdate();
 	ScrollBackground();
-	UpdateEnemies();
 	mSceneGraph->update(gt);
 }
-
-
 
 void World::draw()
 {
 	mSceneGraph->draw();
 }
 
-void World::HandleInputUpdate()
-{
-	mPlayerAircraft->setVelocity(0.0f, 0.0f, 0.0f);
-
-	if (GetAsyncKeyState('W') & 0x8000)
-	{
-		mPlayerAircraft->setVelocity(0.0f, 0.0f, 1.0f);
-	}
-	if (GetAsyncKeyState('S') & 0x8000)
-	{
-		mPlayerAircraft->setVelocity(0.0f, 0.0f, -1.0f);
-	}
-	if (GetAsyncKeyState('D') & 0x8000)
-	{
-		mPlayerAircraft->setVelocity(1.0f, 0.0f, 0.0f);
-	}
-	if (GetAsyncKeyState('A') & 0x8000)
-	{
-		mPlayerAircraft->setVelocity(-1.0f, 0.0f,0.0f);
-	}
-}
-
+// TODO: Create Background Class and move this code to it
 void World::ScrollBackground()
 {
 	if (mBackground->getWorldPosition().x <= -5.0)
 	{
 		mBackground->setPosition(5.0, 0, 0.0);
-	}
-}
-
-void World::UpdateEnemies()
-{
-	for each (Aircraft* enemy in mEnemies)
-	{
-		if (enemy->getWorldPosition().x <= -4.0)
-		{
-			enemy->setPosition(rand() % 10 + 6, 0.1, 1.7 - (rand() % 34)/10);
-		}
 	}
 }
 
