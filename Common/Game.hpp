@@ -32,6 +32,7 @@ private:
 
 	//step5
 	void LoadTextures();
+	void CreateTexture(std::string Name ,std::wstring PathName);
 
 	void BuildRootSignature();
 
@@ -43,6 +44,7 @@ private:
 	void BuildPSOs();
 	void BuildFrameResources();
 	void BuildMaterials();
+	void CreateMaterials(std::string Name, XMFLOAT4 DiffuseAlbedo, XMFLOAT3 Fresnel, float Roughness);
 	void BuildRenderItems();
 	void DrawRenderItems(ID3D12GraphicsCommandList* cmdList, const std::vector<RenderItem*>& ritems);
 

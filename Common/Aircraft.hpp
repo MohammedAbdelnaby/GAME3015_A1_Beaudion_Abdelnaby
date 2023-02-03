@@ -11,24 +11,14 @@ class Aircraft :
     public Entity
 {
 public:
-	enum Type
-	{
-		Player,
-		Enemy,
-	};
+
+public:
+	Aircraft(Game* game);
 
 
 public:
-	Aircraft(Type type, Game* game);
-
-
-private:
-	void				updateCurrent(const GameTimer& gt) override;
-	virtual void		drawCurrent() const;
 	virtual void		buildCurrent();
 
-
-private:
-	Type				mType;
+protected:
 	std::string			mSprite;
 };

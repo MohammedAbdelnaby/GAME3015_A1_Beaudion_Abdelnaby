@@ -349,47 +349,25 @@ void Game::UpdateMainPassCB(const GameTimer& gt)
 
 void Game::LoadTextures()
 {
-	//Player
+	CreateTexture("PlayerShip", L"Textures/PlayerShip.dds");
+	CreateTexture("EnemyShip", L"Textures/EnemyShip.dds");
+	CreateTexture("Background", L"Textures/Background.dds");
+	CreateTexture("Planet", L"Textures/Planet.dds");
+}
+
+void Game::CreateTexture(std::string Name, std::wstring PathName)
+{
 	auto PlayerShip = std::make_unique<Texture>();
-	PlayerShip->Name = "PlayerShip";
-	PlayerShip->Filename = L"Textures/PlayerShip.dds";
+	PlayerShip->Name = Name;
+	PlayerShip->Filename = PathName;
 	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
 		mCommandList.Get(), PlayerShip->Filename.c_str(),
 		PlayerShip->Resource, PlayerShip->UploadHeap));
 
 	mTextures[PlayerShip->Name] = std::move(PlayerShip);
-
-	//Enemy
-	auto EnemyShip = std::make_unique<Texture>();
-	EnemyShip->Name = "EnemyShip";
-	EnemyShip->Filename = L"Textures/EnemyShip.dds";
-	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-		mCommandList.Get(), EnemyShip->Filename.c_str(),
-		EnemyShip->Resource, EnemyShip->UploadHeap));
-
-	mTextures[EnemyShip->Name] = std::move(EnemyShip);
-
-
-	//Desert
-	auto Background = std::make_unique<Texture>();
-	Background->Name = "Background";
-	Background->Filename = L"Textures/Background.dds";
-	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-		mCommandList.Get(), Background->Filename.c_str(),
-		Background->Resource, Background->UploadHeap));
-
-	mTextures[Background->Name] = std::move(Background);
-
-	//Planet
-	auto Planet = std::make_unique<Texture>();
-	Planet->Name = "Planet";
-	Planet->Filename = L"Textures/Planet.dds";
-	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-		mCommandList.Get(), Planet->Filename.c_str(),
-		Planet->Resource, Planet->UploadHeap));
-	
-	mTextures[Planet->Name] = std::move(Planet);
 }
+
+
 
 void Game::BuildRootSignature()
 {
@@ -605,46 +583,22 @@ void Game::BuildFrameResources()
 //step13
 void Game::BuildMaterials()
 {
+	CreateMaterials("Player", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
+	CreateMaterials("Enemy", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
+	CreateMaterials("Desert", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
+	CreateMaterials("Planet", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
+}
+
+void Game::CreateMaterials(std::string Name, XMFLOAT4 DiffuseAlbedo, XMFLOAT3 Fresnel, float Roughness)
+{
 	auto Player = std::make_unique<Material>();
-	Player->Name = "Player";
-	Player->MatCBIndex = 0;
-	Player->DiffuseSrvHeapIndex = 0;
-	Player->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	Player->FresnelR0 = XMFLOAT3(0.05f, 0.05f, 0.05f);
-	Player->Roughness = 0.2f;
-
-	mMaterials["Player"] = std::move(Player);
-
-	auto Enemy = std::make_unique<Material>();
-	Enemy->Name = "Enemy";
-	Enemy->MatCBIndex = 1;
-	Enemy->DiffuseSrvHeapIndex = 1;
-	Enemy->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	Enemy->FresnelR0 = XMFLOAT3(0.05f, 0.05f, 0.05f);
-	Enemy->Roughness = 0.2f;
-
-	mMaterials["Enemy"] = std::move(Enemy);
-
-	auto Desert = std::make_unique<Material>();
-	Desert->Name = "Desert";
-	Desert->MatCBIndex = 2;
-	Desert->DiffuseSrvHeapIndex = 2;
-	Desert->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	Desert->FresnelR0 = XMFLOAT3(0.05f, 0.05f, 0.05f);
-	Desert->Roughness = 0.2f;
-
-	mMaterials["Desert"] = std::move(Desert);
-
-	auto Planet = std::make_unique<Material>();
-	Planet->Name = "Planet";
-	Planet->MatCBIndex = 3;
-	Planet->DiffuseSrvHeapIndex = 3;
-	Planet->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	Planet->FresnelR0 = XMFLOAT3(0.05f, 0.05f, 0.05f);
-	Planet->Roughness = 0.2f;
-
-	mMaterials["Planet"] = std::move(Planet);
-
+	Player->Name = Name;
+	Player->MatCBIndex = mMaterials.size();
+	Player->DiffuseSrvHeapIndex = mMaterials.size();
+	Player->DiffuseAlbedo = DiffuseAlbedo;
+	Player->FresnelR0 = Fresnel;
+	Player->Roughness = Roughness;
+	mMaterials[Name] = std::move(Player);
 }
 
 void Game::BuildRenderItems()

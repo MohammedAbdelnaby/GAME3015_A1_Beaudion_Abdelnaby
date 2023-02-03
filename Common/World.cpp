@@ -15,7 +15,6 @@ World::World(Game* game)
 	, mWorldBounds(-1.5f, 1.5f, 200.0f, 0.0f) //Left, Right, Down, Up
 	, mSpawnPosition(0.f, 0.f)
 	, mScrollSpeed(1.0f)
-	, mEnemySpeed(5)
 {
 }
 
@@ -44,7 +43,7 @@ void World::buildScene()
 #pragma region Player
 
 	srand(time(NULL));
-	std::unique_ptr<Aircraft> player(new Aircraft(Aircraft::Player, mGame));
+	std::unique_ptr<PlayerAircraft> player(new PlayerAircraft(mGame));
 	mPlayerAircraft = player.get();
 	mPlayerAircraft->setPosition(-2, 0.1, 0.0);
 	mPlayerAircraft->setScale(1.0, 1.0, 1.0);
@@ -54,20 +53,18 @@ void World::buildScene()
 
 #pragma region Enemies
 
-	std::unique_ptr<Aircraft> enemy1(new Aircraft(Aircraft::Enemy, mGame));
+	std::unique_ptr<EnemyAircraft> enemy1(new EnemyAircraft(mGame));
 	auto raptor = enemy1.get();
 	raptor->setPosition(rand() % 10 + 6, 0.05, 1.7 - rand() % 3);
 	raptor->setScale(1.0, 1.0, 1.0);
-	raptor->setVelocity(-mEnemySpeed, 0.0f, 0.0f);
 	raptor->setWorldRotation(0, XM_PI * 2, 0);
 	mSceneGraph->attachChild(std::move(enemy1));
 	mEnemies.push_back(raptor);
 
-	std::unique_ptr<Aircraft> enemy2(new Aircraft(Aircraft::Enemy, mGame));
+	std::unique_ptr<EnemyAircraft> enemy2(new EnemyAircraft(mGame));
 	auto raptor2 = enemy2.get();
 	raptor2->setPosition(rand() % 10 + 6, 0.05, 1.7 - rand() % 3);
 	raptor2->setScale(1.0, 1.0, 1.0);
-	raptor2->setVelocity(-mEnemySpeed, 0.0f, 0.0f);
 	raptor2->setWorldRotation(0, XM_PI * 2, 0);
 	mSceneGraph->attachChild(std::move(enemy2));
 	mEnemies.push_back(raptor2);

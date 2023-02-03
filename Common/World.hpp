@@ -6,6 +6,8 @@
 #pragma once
 #include "SceneNode.hpp"
 #include "Aircraft.hpp"
+#include "PlayerAircraft.h"
+#include "EnemyAircraft.h"
 #include "SpriteNode.h"
 
 class World 
@@ -41,7 +43,7 @@ private:
 	XMFLOAT2		    				mSpawnPosition;
 	float								mScrollSpeed;
 	float								mEnemySpeed;
-	Aircraft*							mPlayerAircraft;
+	PlayerAircraft*						mPlayerAircraft;
 	SpriteNode*							mBackground,*mWorld;
-	std::list<Aircraft*>				mEnemies;
+	std::list<EnemyAircraft*>				mEnemies;
 };
