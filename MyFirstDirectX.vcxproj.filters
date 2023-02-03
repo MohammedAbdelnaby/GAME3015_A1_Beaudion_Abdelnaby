@@ -19,6 +19,9 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{c5ea0f7c-78dd-43a2-be05-c21f9b1fb81b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObjects">
+      <UniqueIdentifier>{af83bed2-1384-495a-babf-44bee7a7333d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\color.hlsl">
@@ -84,10 +87,16 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Common\PlayerAircraft.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="Common\EnemyAircraft.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Background.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Planets.cpp">
+      <Filter>GameObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -143,10 +152,16 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Common\PlayerAircraft.h">
-      <Filter>Header Files</Filter>
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Background.h">
+      <Filter>GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="Common\EnemyAircraft.h">
-      <Filter>Header Files</Filter>
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Planets.h">
+      <Filter>GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

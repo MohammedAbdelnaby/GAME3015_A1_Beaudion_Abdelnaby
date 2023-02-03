@@ -5,16 +5,9 @@ class SpriteNode :
     public Entity
 {
 public:
-	enum Type
-	{
-		Background,
-		Planet,
-	};
+	SpriteNode(Game* game);
 
-	SpriteNode(Type type, Game* game);
-
-private:
-	Type				mType;
+protected:
 	std::string			mSprite;
 	XMFLOAT3			mTiling;
 	virtual void		drawCurrent() const;

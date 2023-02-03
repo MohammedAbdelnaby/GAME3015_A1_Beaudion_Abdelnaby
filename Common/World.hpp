@@ -9,6 +9,8 @@
 #include "PlayerAircraft.h"
 #include "EnemyAircraft.h"
 #include "SpriteNode.h"
+#include "Background.h"
+#include "Planets.h"
 
 class World 
 {
@@ -16,9 +18,6 @@ public:
 	explicit							World(Game* window);
 	void								update(const GameTimer& gt);
 	void								draw();
-	void								HandleInputUpdate();
-	void								ScrollBackground();
-	void								UpdateEnemies();
 
 	//void								loadTextures();
 	void								buildScene();
@@ -27,9 +26,9 @@ public:
 private:
 	enum Layer
 	{
-		Background,
-		Air,
-		LayerCount
+		BACKGROUND,
+		AIR,
+		LAYER_COUNT
 	};
 
 
@@ -37,13 +36,13 @@ private:
 	Game*								mGame;
 
 	SceneNode*							mSceneGraph;
-	std::array<SceneNode*, LayerCount>	mSceneLayers;
+	std::array<SceneNode*, LAYER_COUNT>	mSceneLayers;
 
 	XMFLOAT4							mWorldBounds;
 	XMFLOAT2		    				mSpawnPosition;
-	float								mScrollSpeed;
 	float								mEnemySpeed;
 	PlayerAircraft*						mPlayerAircraft;
-	SpriteNode*							mBackground,*mWorld;
-	std::list<EnemyAircraft*>				mEnemies;
+	Background*							mBackground;
+	std::list<Planets*>					mPlanets;
+	std::list<EnemyAircraft*>			mEnemies;
 };

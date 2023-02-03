@@ -6,24 +6,14 @@
 #include "SpriteNode.h"
 #include "Game.hpp"
 
-SpriteNode::SpriteNode(Type type, Game* game) : Entity(game)
-, mType(type)
+SpriteNode::SpriteNode(Game* game) : Entity(game)
 {
-	switch (type)
-	{
-	case (Background):
-		mSprite = "Desert";
-		mTiling = XMFLOAT3(10.0f, 10.0f, 10.0f);
-		break;
-	case (Planet):
-		mSprite = "Planet";
-		mTiling = XMFLOAT3(1.0f, 1.0f, 1.0f);
-		break;
-	}
+
 }
 
 void SpriteNode::drawCurrent() const
 {
+	renderer->Mat = game->getMaterials()[mSprite].get();
 	renderer->World = getTransform();
 	renderer->NumFramesDirty++;
 }

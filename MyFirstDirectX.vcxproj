@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Common\Aircraft.cpp" />
+    <ClCompile Include="Common\Background.cpp" />
     <ClCompile Include="Common\Camera.cpp" />
     <ClCompile Include="Common\d3dApp.cpp" />
     <ClCompile Include="Common\d3dUtil.cpp" />
@@ -54,6 +55,7 @@
     <ClCompile Include="Common\GeometryGenerator.cpp" />
     <ClCompile Include="Common\main.cpp" />
     <ClCompile Include="Common\MathHelper.cpp" />
+    <ClCompile Include="Common\Planets.cpp" />
     <ClCompile Include="Common\PlayerAircraft.cpp" />
     <ClCompile Include="Common\SceneNode.cpp" />
     <ClCompile Include="Common\SpriteNode.cpp" />
@@ -61,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Aircraft.hpp" />
+    <ClInclude Include="Common\Background.h" />
     <ClInclude Include="Common\Camera.h" />
     <ClInclude Include="Common\d3dApp.h" />
     <ClInclude Include="Common\d3dUtil.h" />
@@ -79,6 +82,7 @@
     <ClInclude Include="Common\SpriteNode.h" />
     <ClInclude Include="Common\UploadBuffer.h" />
     <ClInclude Include="Common\World.hpp" />
+    <ClInclude Include="Planets.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

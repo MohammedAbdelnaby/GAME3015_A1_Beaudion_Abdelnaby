@@ -353,6 +353,16 @@ void Game::LoadTextures()
 	CreateTexture("EnemyShip", L"Textures/EnemyShip.dds");
 	CreateTexture("Background", L"Textures/Background.dds");
 	CreateTexture("Planet", L"Textures/Planet.dds");
+	CreateTexture("Planet02", L"Textures/Planet02.dds");
+	CreateTexture("Planet03", L"Textures/Planet03.dds");
+	CreateTexture("Planet04", L"Textures/Planet04.dds");
+	CreateTexture("Planet05", L"Textures/Planet05.dds");
+	CreateTexture("Planet06", L"Textures/Planet06.dds");
+	CreateTexture("Planet07", L"Textures/Planet07.dds");
+	CreateTexture("Planet08", L"Textures/Planet08.dds");
+	CreateTexture("Planet09", L"Textures/Planet09.dds");
+	CreateTexture("Planet10", L"Textures/Planet010.dds");
+
 }
 
 void Game::CreateTexture(std::string Name, std::wstring PathName)
@@ -419,7 +429,7 @@ void Game::BuildDescriptorHeaps()
 	// Create the SRV heap.
 	//
 	D3D12_DESCRIPTOR_HEAP_DESC srvHeapDesc = {};
-	srvHeapDesc.NumDescriptors = 4;
+	srvHeapDesc.NumDescriptors = mTextures.size();
 	srvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
 	srvHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
 	ThrowIfFailed(md3dDevice->CreateDescriptorHeap(&srvHeapDesc, IID_PPV_ARGS(&mSrvDescriptorHeap)));
@@ -433,6 +443,15 @@ void Game::BuildDescriptorHeaps()
 	auto RaptorTex = mTextures["EnemyShip"]->Resource;
 	auto DesertTex = mTextures["Background"]->Resource;
 	auto PlanetTex = mTextures["Planet"]->Resource;
+	auto Planet2Tex = mTextures["Planet02"]->Resource;
+	auto Planet3Tex = mTextures["Planet03"]->Resource;
+	auto Planet4Tex = mTextures["Planet04"]->Resource;
+	auto Planet5Tex = mTextures["Planet05"]->Resource;
+	auto Planet6Tex = mTextures["Planet06"]->Resource;
+	auto Planet7Tex = mTextures["Planet07"]->Resource;
+	auto Planet8Tex = mTextures["Planet08"]->Resource;
+	auto Planet9Tex = mTextures["Planet09"]->Resource;
+	auto Planet10Tex = mTextures["Planet10"]->Resource;
 
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
 
@@ -467,11 +486,46 @@ void Game::BuildDescriptorHeaps()
 	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
 	srvDesc.Format = DesertTex->GetDesc().Format;
 	md3dDevice->CreateShaderResourceView(DesertTex.Get(), &srvDesc, hDescriptor);
-	
-	//Planet Descriptor
+
 	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
 	srvDesc.Format = PlanetTex->GetDesc().Format;
 	md3dDevice->CreateShaderResourceView(PlanetTex.Get(), &srvDesc, hDescriptor);
+
+	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
+	srvDesc.Format = Planet2Tex->GetDesc().Format;
+	md3dDevice->CreateShaderResourceView(Planet2Tex.Get(), &srvDesc, hDescriptor);
+
+	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
+	srvDesc.Format = Planet3Tex->GetDesc().Format;
+	md3dDevice->CreateShaderResourceView(Planet3Tex.Get(), &srvDesc, hDescriptor);
+
+	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
+	srvDesc.Format = Planet4Tex->GetDesc().Format;
+	md3dDevice->CreateShaderResourceView(Planet4Tex.Get(), &srvDesc, hDescriptor);
+
+	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
+	srvDesc.Format = Planet5Tex->GetDesc().Format;
+	md3dDevice->CreateShaderResourceView(Planet5Tex.Get(), &srvDesc, hDescriptor);
+
+	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
+	srvDesc.Format = Planet6Tex->GetDesc().Format;
+	md3dDevice->CreateShaderResourceView(Planet6Tex.Get(), &srvDesc, hDescriptor);
+
+	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
+	srvDesc.Format = Planet7Tex->GetDesc().Format;
+	md3dDevice->CreateShaderResourceView(Planet7Tex.Get(), &srvDesc, hDescriptor);
+
+	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
+	srvDesc.Format = Planet8Tex->GetDesc().Format;
+	md3dDevice->CreateShaderResourceView(Planet8Tex.Get(), &srvDesc, hDescriptor);
+
+	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
+	srvDesc.Format = Planet9Tex->GetDesc().Format;
+	md3dDevice->CreateShaderResourceView(Planet9Tex.Get(), &srvDesc, hDescriptor);
+
+	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
+	srvDesc.Format = Planet10Tex->GetDesc().Format;
+	md3dDevice->CreateShaderResourceView(Planet10Tex.Get(), &srvDesc, hDescriptor);
 
 }
 
@@ -585,8 +639,17 @@ void Game::BuildMaterials()
 {
 	CreateMaterials("Player", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 	CreateMaterials("Enemy", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
-	CreateMaterials("Desert", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
+	CreateMaterials("Background", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 	CreateMaterials("Planet", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
+	CreateMaterials("Planet02", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
+	CreateMaterials("Planet03", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
+	CreateMaterials("Planet04", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
+	CreateMaterials("Planet05", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
+	CreateMaterials("Planet06", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
+	CreateMaterials("Planet07", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
+	CreateMaterials("Planet08", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
+	CreateMaterials("Planet09", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
+	CreateMaterials("Planet10", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 }
 
 void Game::CreateMaterials(std::string Name, XMFLOAT4 DiffuseAlbedo, XMFLOAT3 Fresnel, float Roughness)

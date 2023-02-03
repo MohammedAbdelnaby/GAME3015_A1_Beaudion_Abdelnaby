@@ -14,13 +14,11 @@ World::World(Game* game)
 	, mBackground(nullptr)
 	, mWorldBounds(-1.5f, 1.5f, 200.0f, 0.0f) //Left, Right, Down, Up
 	, mSpawnPosition(0.f, 0.f)
-	, mScrollSpeed(1.0f)
 {
 }
 
 void World::update(const GameTimer& gt)
 {
-	ScrollBackground();
 	mSceneGraph->update(gt);
 }
 
@@ -29,14 +27,6 @@ void World::draw()
 	mSceneGraph->draw();
 }
 
-// TODO: Create Background Class and move this code to it
-void World::ScrollBackground()
-{
-	if (mBackground->getWorldPosition().x <= -5.0)
-	{
-		mBackground->setPosition(5.0, 0, 0.0);
-	}
-}
 
 void World::buildScene()
 {
@@ -73,21 +63,28 @@ void World::buildScene()
 
 #pragma region Scenery
 
-	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(SpriteNode::Background, mGame));
+	std::unique_ptr<Background> backgroundSprite(new Background(mGame));
 	mBackground = backgroundSprite.get();
 	//mBackground->setPosition(mWorldBounds.x, mWorldBounds.z);
 	mBackground->setPosition(5.0, 0, 0.0);
 	mBackground->setScale(20.0, 1.0, 20.0);
-	mBackground->setVelocity(-mScrollSpeed, 0, 0.0);
 	mSceneGraph->attachChild(std::move(backgroundSprite));
 
-	std::unique_ptr<SpriteNode> worldSprite(new SpriteNode(SpriteNode::Planet, mGame));
-	mWorld = worldSprite.get();
-	mWorld->setPosition(2.5, 0.01, 1.5);
-	mWorld->setScale(0.5, 1.0, 0.5);
-	mWorld->setVelocity(-mScrollSpeed/10, 0, 0.0);
-	mSceneGraph->attachChild(std::move(worldSprite));
+	std::unique_ptr<Planets> planetsSprite1(new Planets(mGame));
+	auto Planet1 = planetsSprite1.get();
+	//mBackground->setPosition(mWorldBounds.x, mWorldBounds.z);
+	Planet1->setPosition(rand() % 10 + 6, 0.05, 1.7 - rand() % 3);
+	Planet1->setScale(1.0, 1.0, 1.0);
+	mSceneGraph->attachChild(std::move(planetsSprite1));
+	mPlanets.push_back(Planet1);
 
+	std::unique_ptr<Planets> planetsSprite2(new Planets(mGame));
+	auto Planet2 = planetsSprite2.get();
+	//mBackground->setPosition(mWorldBounds.x, mWorldBounds.z);
+	Planet2->setPosition(rand() % 10 + 6, 0.05, 1.7 - rand() % 3);
+	Planet2->setScale(1.0, 1.0, 1.0);
+	mSceneGraph->attachChild(std::move(planetsSprite2));
+	mPlanets.push_back(Planet2);
 #pragma endregion
 
 	mSceneGraph->build();
