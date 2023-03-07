@@ -3,28 +3,29 @@
 PlayerAircraft::PlayerAircraft(Game* game) : Aircraft(game)
 {
 	mSprite = "Player";
+	mKeyBinding['W'] = MoveUp;
+	mKeyBinding['S'] = MoveDown;
+	mKeyBinding['D'] = MoveRight;
+	mKeyBinding['A'] = MoveLeft;
+
+	Command command;
+
+	command.action = derivedAction<Aircraft>(AircraftMover(0.0f, 0.f, playerSpeed));
+	command.category = getCategory();
+	mActionBinding[MoveUp] = command;
+
+	command.action = derivedAction<Aircraft>(AircraftMover(0.0f, 0.f, -playerSpeed));
+	mActionBinding[MoveDown] = command;
+
+	command.action = derivedAction<Aircraft>(AircraftMover(playerSpeed, 0.f, 0.f));
+	mActionBinding[MoveRight] = command;
+
+	command.action = derivedAction<Aircraft>(AircraftMover(-playerSpeed, 0.f, 0.f));
+	mActionBinding[MoveLeft] = command;
 }
 
 void PlayerAircraft::updateCurrent(const GameTimer& gt)
-{
-	//setVelocity(0.0f, 0.0f, 0.0f);
-	//if (GetAsyncKeyState('W') & 0x8000)
-	//{
-	//	setVelocity(0.0f, 0.0f, 1.0f);
-	//}
-	//if (GetAsyncKeyState('S') & 0x8000)
-	//{
-	//	setVelocity(0.0f, 0.0f, -1.0f);
-	//}
-	//if (GetAsyncKeyState('D') & 0x8000)
-	//{
-	//	setVelocity(1.0f, 0.0f, 0.0f);
-	//}
-	//if (GetAsyncKeyState('A') & 0x8000)
-	//{
-	//	setVelocity(-1.0f, 0.0f, 0.0f);
-	//}
-	
+{	
 	Entity::updateCurrent(gt);
 }
 
@@ -37,43 +38,42 @@ unsigned int PlayerAircraft::getCategory()
 	return Category::PlayerAircraft;
 }
 
+bool PlayerAircraft::isRealtimeAction(Action action)
+{
+	if (mActionBinding[action].action)
+	{
+		return true;
+	}
+	return false;
+}
+
 void PlayerAircraft::handleEvent(CommandQueue& commands)
 {
+	// stuff
 }
 
 void PlayerAircraft::handleRealtimeInput(CommandQueue& commands)
 {
-	const float playerSpeed = 1.f;
-	if (GetAsyncKeyState('A') & 0x8000)
+	for each (auto pair in mKeyBinding)
 	{
-		Command moveLeft;
-		moveLeft.category = Category::PlayerAircraft;
-		moveLeft.action = derivedAction<Aircraft>(
-			AircraftMover(-playerSpeed, 0.f, 0.f));
-		commands.push(moveLeft);
+		if (GetAsyncKeyState(pair.first) & 0x8000 && isRealtimeAction(pair.second))
+		{
+			commands.push(mActionBinding[pair.second]);
+		}
 	}
-	if (GetAsyncKeyState('S') & 0x8000)
-	{
-		Command moveLeft;
-		moveLeft.category = Category::PlayerAircraft;
-		moveLeft.action = derivedAction<Aircraft>(
-			AircraftMover(0.f, 0.f, -playerSpeed));
-		commands.push(moveLeft);
-	}
-	if (GetAsyncKeyState('D') & 0x8000)
-	{
-		Command moveLeft;
-		moveLeft.category = Category::PlayerAircraft;
-		moveLeft.action = derivedAction<Aircraft>(
-			AircraftMover(playerSpeed, 0.f, 0.f));
-		commands.push(moveLeft);
-	}
-	if (GetAsyncKeyState('W') & 0x8000)
-	{
-		Command moveLeft;
-		moveLeft.category = Category::PlayerAircraft;
-		moveLeft.action = derivedAction<Aircraft>(
-			AircraftMover(0.f, 0.f, playerSpeed));
-		commands.push(moveLeft);
-	}
+}
+
+void PlayerAircraft::assignKey(Action action, int key)
+{
+	mKeyBinding.emplace(action, key);
+}
+
+int PlayerAircraft::getAssignedKey(Action action) const
+{
+	// help pls
+}
+
+void PlayerAircraft::SetPlayerSpeed(float speed)
+{
+	playerSpeed = speed;
 }
