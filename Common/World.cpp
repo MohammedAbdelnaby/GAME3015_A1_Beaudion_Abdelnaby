@@ -19,6 +19,8 @@ World::World(Game* game)
 
 void World::update(const GameTimer& gt)
 {
+	mPlayerAircraft->setVelocity(0.f, 0.f, 0.f);
+	processInput();
 	// Forward commands to the scene graph
 	while (!mCommandQueue.isEmpty())
 		mSceneGraph->onCommand(mCommandQueue.pop(), gt);

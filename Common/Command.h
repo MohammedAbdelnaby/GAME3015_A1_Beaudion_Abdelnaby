@@ -3,6 +3,7 @@
 #include <functional>
 #include <cassert>
 #include "GameTimer.h"
+#include "Category.h"
 
 class SceneNode;
 

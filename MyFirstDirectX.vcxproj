@@ -44,6 +44,7 @@
     <ClCompile Include="Common\Aircraft.cpp" />
     <ClCompile Include="Common\Background.cpp" />
     <ClCompile Include="Common\Camera.cpp" />
+    <ClCompile Include="Common\Command.cpp" />
     <ClCompile Include="Common\CommandQueue.cpp" />
     <ClCompile Include="Common\d3dApp.cpp" />
     <ClCompile Include="Common\d3dUtil.cpp" />
