@@ -10,6 +10,8 @@
 #include "../Common/GeometryGenerator.h"
 #include "../Common/Camera.h"
 #include "FrameResource.h"
+#include "Category.h"
+#include "Command.h"
 
 using Microsoft::WRL::ComPtr;
 using namespace DirectX;
@@ -76,6 +78,9 @@ public:
 	void					setWorldRotation(float x, float y, float z);
 	XMFLOAT3				getWorldScale() const;
 	void					setScale(float x, float y, float z);
+	virtual unsigned int	getCategory();
+
+	void                    onCommand(const Command& command, const GameTimer& dt);
 
 	XMFLOAT4X4				getWorldTransform() const;
 	XMFLOAT4X4				getTransform() const;
@@ -100,4 +105,3 @@ private:
 	std::vector<Ptr>		mChildren;
 	SceneNode*				mParent;
 };
-

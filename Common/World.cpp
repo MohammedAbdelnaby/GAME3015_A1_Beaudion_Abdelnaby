@@ -19,6 +19,10 @@ World::World(Game* game)
 
 void World::update(const GameTimer& gt)
 {
+	// Forward commands to the scene graph
+	while (!mCommandQueue.isEmpty())
+		mSceneGraph->onCommand(mCommandQueue.pop(), gt);
+	// Regular update step
 	mSceneGraph->update(gt);
 }
 
@@ -88,4 +92,16 @@ void World::buildScene()
 #pragma endregion
 
 	mSceneGraph->build();
+}
+
+CommandQueue& World::getCommandQueue()
+{
+	return mCommandQueue;
+}
+
+void World::processInput()
+{
+	CommandQueue& commands = getCommandQueue();
+	mPlayerAircraft->handleEvent(commands);
+	mPlayerAircraft->handleRealtimeInput(commands);
 }

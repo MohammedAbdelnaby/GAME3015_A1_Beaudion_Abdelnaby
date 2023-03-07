@@ -24,9 +24,32 @@ void PlayerAircraft::updateCurrent(const GameTimer& gt)
 	{
 		setVelocity(-1.0f, 0.0f, 0.0f);
 	}
+	
 	Entity::updateCurrent(gt);
 }
 
 void PlayerAircraft::drawCurrent() const
 {
+}
+
+unsigned int PlayerAircraft::getCategory()
+{
+	return Category::PlayerAircraft;
+}
+
+void PlayerAircraft::handleEvent(CommandQueue& commands)
+{
+}
+
+void PlayerAircraft::handleRealtimeInput(CommandQueue& commands)
+{
+	const float playerSpeed = 1.f;
+	if (GetAsyncKeyState(VK_UP) & 0x8000)
+	{
+		Command moveLeft;
+		moveLeft.category = Category::PlayerAircraft;
+		moveLeft.action = derivedAction<PlayerAircraft>(
+			AircraftMover(-playerSpeed, 0.f, 0.f));
+		commands.push(moveLeft);
+	}
 }

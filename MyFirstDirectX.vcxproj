@@ -44,6 +44,7 @@
     <ClCompile Include="Common\Aircraft.cpp" />
     <ClCompile Include="Common\Background.cpp" />
     <ClCompile Include="Common\Camera.cpp" />
+    <ClCompile Include="Common\CommandQueue.cpp" />
     <ClCompile Include="Common\d3dApp.cpp" />
     <ClCompile Include="Common\d3dUtil.cpp" />
     <ClCompile Include="Common\DDSTextureLoader.cpp" />
@@ -65,6 +66,9 @@
     <ClInclude Include="Common\Aircraft.hpp" />
     <ClInclude Include="Common\Background.h" />
     <ClInclude Include="Common\Camera.h" />
+    <ClInclude Include="Common\Category.h" />
+    <ClInclude Include="Common\Command.h" />
+    <ClInclude Include="Common\CommandQueue.h" />
     <ClInclude Include="Common\d3dApp.h" />
     <ClInclude Include="Common\d3dUtil.h" />
     <ClInclude Include="Common\d3dx12.h" />

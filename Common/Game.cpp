@@ -196,65 +196,12 @@ void Game::OnKeyboardInput(const GameTimer& gt)
 	XMFLOAT3  oppositef3(-1, -1, -1);
 	XMVECTOR opposite = XMLoadFloat3(&oppositef3);
 
-	//if (GetAsyncKeyState('W') & 0x8000)
-	//{
-	//	bool hit = false;
-
-	//	if (!hit)
-	//	{
-	//		mCamera.Walk(10.0f * dt);
-
-	//	}
-	//}
-
-	//if (GetAsyncKeyState('S') & 0x8000)
-	//{
-	//	bool hit = false;
-	//	if (!hit)
-	//	{
-	//		mCamera.Walk(-10.0f * dt);
-	//	}
-
-	//}
-	//if (GetAsyncKeyState('A') & 0x8000)
-	//{
-	//	bool hit = false;
-	//	if (!hit)
-	//	{
-	//		mCamera.Strafe(-10.0f * dt);
-	//	}
-
-
-	//}
-	//if (GetAsyncKeyState('D') & 0x8000)
-	//{
-	//	bool hit = false;
-	//	if (!hit)
-	//	{
-	//		mCamera.Strafe(10.0f * dt);
-	//	}
-	//}
-
-
 	mCamera.UpdateViewMatrix();
 }
 
 void Game::UpdateCamera(const GameTimer& gt)
 {
-	// Convert Spherical to Cartesian coordinates.
-	//mEyePos.x = mRadius * sinf(mPhi) * cosf(mTheta);
-	//mEyePos.z = mRadius * sinf(mPhi) * sinf(mTheta);
-	//mEyePos.y = mRadius * cosf(mPhi);
-
-	//// Build the view matrix.
-	//XMVECTOR pos = XMVectorSet(mEyePos.x, mEyePos.y, mEyePos.z, 1.0f);
-	//XMVECTOR target = XMVectorZero();
-	//XMVECTOR up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
-
-	//XMMATRIX view = XMMatrixLookAtLH(pos, target, up);
-	//XMStoreFloat4x4(&mView, view);
-
-
+	
 }
 
 void Game::AnimateMaterials(const GameTimer& gt)

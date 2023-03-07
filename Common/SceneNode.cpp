@@ -6,6 +6,7 @@
 #include "SceneNode.hpp"
 #include "Game.hpp"
 
+
 SceneNode::SceneNode(Game* game)
 	: mChildren()
 	, mParent(nullptr)
@@ -118,6 +119,19 @@ XMFLOAT3 SceneNode::getWorldScale() const
 void SceneNode::setScale(float x, float y, float z)
 {
 	mWorldScaling = XMFLOAT3(x, y, z);
+}
+
+unsigned int SceneNode::getCategory()
+{
+	return Category::Scene;
+}
+
+void SceneNode::onCommand(const Command& command, const GameTimer& dt)
+{
+	if (command.category & getCategory())
+		command.action(*this, dt);
+	for (Ptr& child : mChildren)
+		child->onCommand(command, dt);
 }
 
 XMFLOAT4X4 SceneNode::getWorldTransform() const

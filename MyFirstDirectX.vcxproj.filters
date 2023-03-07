@@ -98,6 +98,9 @@
     <ClCompile Include="Common\Planets.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="Common\CommandQueue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Aircraft.hpp">
@@ -162,6 +165,15 @@
     </ClInclude>
     <ClInclude Include="Planets.h">
       <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Category.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Command.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\CommandQueue.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

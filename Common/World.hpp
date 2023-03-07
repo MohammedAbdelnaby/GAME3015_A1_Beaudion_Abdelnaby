@@ -11,6 +11,7 @@
 #include "SpriteNode.h"
 #include "Background.h"
 #include "Planets.h"
+#include "CommandQueue.h"
 
 class World 
 {
@@ -21,7 +22,8 @@ public:
 
 	//void								loadTextures();
 	void								buildScene();
-
+	CommandQueue&						getCommandQueue();
+	void								processInput();
 
 private:
 	enum Layer
@@ -37,6 +39,7 @@ private:
 
 	SceneNode*							mSceneGraph;
 	std::array<SceneNode*, LAYER_COUNT>	mSceneLayers;
+	CommandQueue						mCommandQueue;
 
 	XMFLOAT4							mWorldBounds;
 	XMFLOAT2		    				mSpawnPosition;
