@@ -11,7 +11,7 @@ StateStack::StateStack(Game* context)
 {
 }
 
-void StateStack::update(GameTimer& dt)
+void StateStack::update(const GameTimer& dt)
 {
 	// Iterate from top to bottom, stop as soon as update() returns false
 	for (auto itr = mStack.rbegin(); itr != mStack.rend(); ++itr)

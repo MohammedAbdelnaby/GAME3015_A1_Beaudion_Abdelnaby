@@ -32,6 +32,7 @@ private:
 	void UpdateMainPassCB(const GameTimer& gt);
 
 	// States
+	void processEvents();
 	void registerStates();
 
 	//step5

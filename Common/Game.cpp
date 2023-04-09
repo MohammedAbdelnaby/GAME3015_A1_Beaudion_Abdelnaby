@@ -4,6 +4,7 @@
 * Last Modified: 2023-01-30
 */
 #include "Game.hpp"
+#include "TitleState.h"
 
 const int gNumFrameResources = 3;
 
@@ -76,6 +77,9 @@ void Game::Update(const GameTimer& gt)
 {
 	OnKeyboardInput(gt);
 	mWorld.update(gt);
+
+	mStateStack.update(gt);
+
 	//UpdateCamera(gt);
 
 	// Cycle through the circular frame resource array.
@@ -138,6 +142,9 @@ void Game::Draw(const GameTimer& gt)
 	mCommandList->SetGraphicsRootConstantBufferView(2, passCB->GetGPUVirtualAddress());
 
 	mWorld.draw();
+
+	mStateStack.draw();
+
 	DrawRenderItems(mCommandList.Get(), mOpaqueRitems);
 
 	// Indicate a state transition on the resource usage.
@@ -299,8 +306,24 @@ void Game::UpdateMainPassCB(const GameTimer& gt)
 	currPassCB->CopyData(0, mMainPassCB);
 }
 
+void Game::processEvents()
+{
+	CommandQueue& commands = mWorld.getCommandQueue();
+
+	Command command;
+	while (!commands.isEmpty())
+	{
+		command = commands.pop();
+
+		mStateStack.handleEvent(command);
+
+		//	mPlayer.handleRealtimeInput(commands);
+	}
+}
+
 void Game::registerStates()
 {
+	mStateStack.registerState<TitleState>(States::Title);
 }
 
 void Game::LoadTextures()

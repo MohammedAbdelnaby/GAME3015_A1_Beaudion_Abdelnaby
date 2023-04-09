@@ -8,12 +8,11 @@ public:
 	TitleState(StateStack& stack, Context context);
 
 	virtual void		draw();
-	virtual bool		update(GameTimer& dt);
+	virtual bool		update(const GameTimer& dt);
 	virtual bool		handleEvent(Command& event);
 
-
 private:
-	Background*			mBackgroundSprite;
+	//Background*			mBackgroundSprite;
 	//sf::Text			mText;
 
 	//bool				mShowText;
