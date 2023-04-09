@@ -11,7 +11,13 @@ StateStack::StateStack(Game* context)
 {
 }
 
-void StateStack::update(GameTimer& dt)
+void StateStack::start()
+{
+	for (State::Ptr& state : mStack)
+		state->buildState();
+}
+
+void StateStack::update(const GameTimer& dt)
 {
 	// Iterate from top to bottom, stop as soon as update() returns false
 	for (auto itr = mStack.rbegin(); itr != mStack.rend(); ++itr)
@@ -45,6 +51,7 @@ void StateStack::handleEvent(Command& event)
 void StateStack::pushState(States::ID stateID)
 {
 	mPendingList.push_back(PendingChange(Push, stateID));
+	applyPendingChanges();
 }
 
 void StateStack::popState()

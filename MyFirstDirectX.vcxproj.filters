@@ -22,6 +22,9 @@
     <Filter Include="GameObjects">
       <UniqueIdentifier>{af83bed2-1384-495a-babf-44bee7a7333d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{bd471d15-7d32-4702-b0cd-42b3afa8c022}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\color.hlsl">

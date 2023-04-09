@@ -30,11 +30,13 @@ public:
 
 public:
 	State(StateStack& stack, Context context);
-	virtual				~State();
+	~State();
 
+	virtual void		buildState() = 0;
 	virtual void		draw() = 0;
-	virtual bool		update(GameTimer dt) = 0;
+	virtual bool		update(const GameTimer& dt) = 0;
 	virtual bool		handleEvent(Command& event) = 0;
+
 
 
 protected:
