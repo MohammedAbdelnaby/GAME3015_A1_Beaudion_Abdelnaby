@@ -104,6 +104,15 @@
     <ClCompile Include="Common\Command.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Common\State.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\StateStack.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\TitleState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Aircraft.hpp">
@@ -128,9 +137,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Common\FrameResource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Common\Game.hpp">
@@ -176,6 +182,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Common\CommandQueue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\StateStack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\State.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\StateIdentifiers.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\ResourceIdentifiers.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\TitleState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

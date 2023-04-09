@@ -4,6 +4,7 @@
 * Last Modified: 2023-01-30
 */
 #include "World.hpp"
+#include "StateStack.h"
 
 class Game : public D3DApp
 {
@@ -29,6 +30,9 @@ private:
 	void UpdateObjectCBs(const GameTimer& gt);
 	void UpdateMaterialCBs(const GameTimer& gt);
 	void UpdateMainPassCB(const GameTimer& gt);
+
+	// States
+	void registerStates();
 
 	//step5
 	void LoadTextures();
@@ -94,6 +98,9 @@ private:
 	POINT mLastMousePos;
 	Camera mCamera;
 	World mWorld;
+
+	// States
+	StateStack mStateStack;
 
 public:
 	std::vector<std::unique_ptr<RenderItem>>& getRenderItems() { return mAllRitems; }

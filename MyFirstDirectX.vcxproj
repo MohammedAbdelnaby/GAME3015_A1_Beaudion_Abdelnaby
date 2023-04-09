@@ -61,6 +61,9 @@
     <ClCompile Include="Common\PlayerAircraft.cpp" />
     <ClCompile Include="Common\SceneNode.cpp" />
     <ClCompile Include="Common\SpriteNode.cpp" />
+    <ClCompile Include="Common\State.cpp" />
+    <ClCompile Include="Common\StateStack.cpp" />
+    <ClCompile Include="Common\TitleState.cpp" />
     <ClCompile Include="Common\World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -77,14 +80,18 @@
     <ClInclude Include="Common\EnemyAircraft.h" />
     <ClInclude Include="Common\Entity.hpp" />
     <ClInclude Include="Common\FrameResource.h" />
-    <ClInclude Include="Common\Game.h" />
     <ClInclude Include="Common\Game.hpp" />
     <ClInclude Include="Common\GameTimer.h" />
     <ClInclude Include="Common\GeometryGenerator.h" />
     <ClInclude Include="Common\MathHelper.h" />
     <ClInclude Include="Common\PlayerAircraft.h" />
+    <ClInclude Include="Common\ResourceIdentifiers.h" />
     <ClInclude Include="Common\SceneNode.hpp" />
     <ClInclude Include="Common\SpriteNode.h" />
+    <ClInclude Include="Common\State.h" />
+    <ClInclude Include="Common\StateIdentifiers.h" />
+    <ClInclude Include="Common\StateStack.h" />
+    <ClInclude Include="Common\TitleState.h" />
     <ClInclude Include="Common\UploadBuffer.h" />
     <ClInclude Include="Common\World.hpp" />
     <ClInclude Include="Planets.h" />

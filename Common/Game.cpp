@@ -10,6 +10,7 @@ const int gNumFrameResources = 3;
 Game::Game(HINSTANCE hInstance)
 	: D3DApp(hInstance)
 	, mWorld(this)
+	, mStateStack(this)
 {
 }
 
@@ -44,6 +45,10 @@ bool Game::Initialize()
 	BuildRenderItems();
 	BuildFrameResources();
 	BuildPSOs();
+
+	// States
+	registerStates();
+	mStateStack.pushState(States::Title);
 
 	// Execute the initialization commands.
 	ThrowIfFailed(mCommandList->Close());
@@ -292,6 +297,10 @@ void Game::UpdateMainPassCB(const GameTimer& gt)
 
 	auto currPassCB = mCurrFrameResource->PassCB.get();
 	currPassCB->CopyData(0, mMainPassCB);
+}
+
+void Game::registerStates()
+{
 }
 
 void Game::LoadTextures()

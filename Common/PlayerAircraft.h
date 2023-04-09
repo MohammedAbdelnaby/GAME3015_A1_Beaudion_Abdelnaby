@@ -18,7 +18,6 @@ public:
     PlayerAircraft(Game* game);
 private:
     void		 updateCurrent(const GameTimer& gt) override;
-    void		 drawCurrent() const;
     unsigned int getCategory() override;
     bool isRealtimeAction(Action action);
 

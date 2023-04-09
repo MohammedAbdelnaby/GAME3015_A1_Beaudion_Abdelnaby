@@ -29,10 +29,6 @@ void PlayerAircraft::updateCurrent(const GameTimer& gt)
 	Entity::updateCurrent(gt);
 }
 
-void PlayerAircraft::drawCurrent() const
-{
-}
-
 unsigned int PlayerAircraft::getCategory()
 {
 	return Category::PlayerAircraft;
@@ -65,12 +61,13 @@ void PlayerAircraft::handleRealtimeInput(CommandQueue& commands)
 
 void PlayerAircraft::assignKey(Action action, int key)
 {
-	mKeyBinding.emplace(action, key);
+	//mKeyBinding.emplace(action, key);
 }
 
 int PlayerAircraft::getAssignedKey(Action action) const
 {
 	// help pls
+	return 0;
 }
 
 void PlayerAircraft::SetPlayerSpeed(float speed)
