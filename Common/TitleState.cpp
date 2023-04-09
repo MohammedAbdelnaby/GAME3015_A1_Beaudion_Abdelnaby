@@ -27,7 +27,7 @@ void TitleState::draw()
 	//	window.draw(mText);
 }
 
-bool TitleState::update(const GameTimer& dt)
+bool TitleState::update(GameTimer& dt)
 {
 	//mTextEffectTime += dt;
 

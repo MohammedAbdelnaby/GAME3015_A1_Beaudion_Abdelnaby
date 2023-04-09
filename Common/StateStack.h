@@ -32,7 +32,7 @@ public:
 	template <typename T>
 	void				registerState(States::ID stateID);
 
-	void				update(const GameTimer& dt);
+	void				update(GameTimer& dt);
 	void				draw();
 	void				handleEvent(Command& event);
 

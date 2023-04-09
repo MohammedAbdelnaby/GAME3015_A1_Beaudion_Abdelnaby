@@ -33,7 +33,7 @@ public:
 	virtual				~State();
 
 	virtual void		draw() = 0;
-	virtual bool		update(const GameTimer& dt) = 0;
+	virtual bool		update(GameTimer dt) = 0;
 	virtual bool		handleEvent(Command& event) = 0;
 
 
