@@ -13,9 +13,7 @@ State::State(StateStack& stack, Context context)
 {
 }
 
-State::~State()
-{
-}
+State::~State() = default;
 
 void State::requestStackPush(States::ID stateID)
 {

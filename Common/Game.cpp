@@ -9,7 +9,6 @@ const int gNumFrameResources = 3;
 
 Game::Game(HINSTANCE hInstance)
 	: D3DApp(hInstance)
-	, mWorld(this)
 	, mStateStack(this)
 {
 }
@@ -25,7 +24,8 @@ bool Game::Initialize()
 	if (!D3DApp::Initialize())
 		return false;
 
-
+	registerStates();
+	mStateStack.pushState(States::Title);
 	mCamera.SetPosition(0, 5, 0);
 	mCamera.Pitch(3.14 / 2);
 
@@ -47,8 +47,6 @@ bool Game::Initialize()
 	BuildPSOs();
 
 	// States
-	registerStates();
-	mStateStack.pushState(States::Title);
 
 	// Execute the initialization commands.
 	ThrowIfFailed(mCommandList->Close());
@@ -75,7 +73,7 @@ void Game::OnResize()
 void Game::Update(const GameTimer& gt)
 {
 	OnKeyboardInput(gt);
-	mWorld.update(gt);
+	mStateStack.update(gt);
 	//UpdateCamera(gt);
 
 	// Cycle through the circular frame resource array.
@@ -137,7 +135,7 @@ void Game::Draw(const GameTimer& gt)
 	auto passCB = mCurrFrameResource->PassCB->Resource();
 	mCommandList->SetGraphicsRootConstantBufferView(2, passCB->GetGPUVirtualAddress());
 
-	mWorld.draw();
+	mStateStack.draw();
 	DrawRenderItems(mCommandList.Get(), mOpaqueRitems);
 
 	// Indicate a state transition on the resource usage.
@@ -301,6 +299,7 @@ void Game::UpdateMainPassCB(const GameTimer& gt)
 
 void Game::registerStates()
 {
+	mStateStack.registerState<TitleState>(States::Title);
 }
 
 void Game::LoadTextures()
@@ -622,8 +621,8 @@ void Game::CreateMaterials(std::string Name, XMFLOAT4 DiffuseAlbedo, XMFLOAT3 Fr
 
 void Game::BuildRenderItems()
 {
-	mWorld.buildScene();
-
+	//mWorld.buildScene();
+	mStateStack.start();
 	// All the render items are opaque.
 	for (auto& e : mAllRitems)
 		mOpaqueRitems.push_back(e.get());

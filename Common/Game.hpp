@@ -5,6 +5,7 @@
 */
 #include "World.hpp"
 #include "StateStack.h"
+#include "TitleState.h"
 
 class Game : public D3DApp
 {
@@ -97,7 +98,7 @@ private:
 
 	POINT mLastMousePos;
 	Camera mCamera;
-	World mWorld;
+
 
 	// States
 	StateStack mStateStack;
