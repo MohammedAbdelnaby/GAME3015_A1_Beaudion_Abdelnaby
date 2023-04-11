@@ -5,7 +5,7 @@
 
 GameState::GameState(StateStack& stack, Context context)
 	: State(stack, context),
-	mSceneGraph(new SceneNode(context.mGame, States::Title))
+	mSceneGraph(new SceneNode(context.mGame, States::Game))
 	, mGame(context.mGame)
 	, mBackground(nullptr)
 	, mWorldBounds(-1.5f, 1.5f, 200.0f, 0.0f) //Left, Right, Down, Up
@@ -19,12 +19,11 @@ void GameState::draw()
 
 bool GameState::update(const GameTimer& dt)
 {
+	mPlayerAircraft->setVelocity(0.f, 0.f, 0.f);
+	processInput();
+	while (!mCommandQueue.isEmpty())
+		mSceneGraph->onCommand(mCommandQueue.pop(), dt);
 	mSceneGraph->update(dt);
-	if (GetAsyncKeyState('S') & 0x8000)
-	{
-		mGame->PopCurrentRenderState();
-		mGame->PushCurrentRenderState(States::Title);
-	}
 	return true;
 }
 
@@ -84,5 +83,17 @@ void GameState::buildState()
 #pragma endregion
 	mSceneGraph->build();
 
+}
+
+CommandQueue& GameState::getCommandQueue()
+{
+	return mCommandQueue;
+}
+
+void GameState::processInput()
+{
+	CommandQueue& commands = getCommandQueue();
+	mPlayerAircraft->handleEvent(commands);
+	mPlayerAircraft->handleRealtimeInput(commands);
 }
 #pragma endregion

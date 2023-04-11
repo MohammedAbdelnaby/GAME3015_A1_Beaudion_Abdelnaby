@@ -56,7 +56,9 @@
     <ClCompile Include="Common\GameState.cpp" />
     <ClCompile Include="Common\GameTimer.cpp" />
     <ClCompile Include="Common\GeometryGenerator.cpp" />
+    <ClCompile Include="Common\Label.cpp" />
     <ClCompile Include="Common\main.cpp" />
+    <ClCompile Include="Common\MainMenuState.cpp" />
     <ClCompile Include="Common\MathHelper.cpp" />
     <ClCompile Include="Common\Planets.cpp" />
     <ClCompile Include="Common\PlayerAircraft.cpp" />
@@ -85,6 +87,8 @@
     <ClInclude Include="Common\GameState.h" />
     <ClInclude Include="Common\GameTimer.h" />
     <ClInclude Include="Common\GeometryGenerator.h" />
+    <ClInclude Include="Common\Label.h" />
+    <ClInclude Include="Common\MainMenuState.h" />
     <ClInclude Include="Common\MathHelper.h" />
     <ClInclude Include="Common\Planets.h" />
     <ClInclude Include="Common\PlayerAircraft.h" />

@@ -19,10 +19,10 @@ void TitleState::draw()
 bool TitleState::update(const GameTimer& dt)
 {
 	mSceneGraph->update(dt);
-	if (GetAsyncKeyState('S') & 0x8000)
+	if (GetAsyncKeyState(' ') & 0x8000)
 	{
 		mGame->PopCurrentRenderState();
-		mGame->PushCurrentRenderState(States::Game);
+		mGame->PushCurrentRenderState(States::Menu);
 	}
 	return true;
 }
@@ -40,10 +40,15 @@ void TitleState::buildState()
 
 	std::unique_ptr<Background> backgroundSprite(new Background(mGame, States::Title));
 	mBackground = backgroundSprite.get();
-	//mBackground->setPosition(mWorldBounds.x, mWorldBounds.z);
 	mBackground->setPosition(5.0, 0, 0.0);
 	mBackground->setScale(20.0, 1.0, 20.0);
 	mSceneGraph->attachChild(std::move(backgroundSprite));
+
+	std::unique_ptr<Label> label(new Label(mGame, "TitleScreen", States::Title));
+	mLabel = label.get();
+	mLabel->setPosition(0.0, 1, 0.0);
+	mLabel->setScale(4.0, 1.0, 2.0);
+	mSceneGraph->attachChild(std::move(label));
 #pragma endregion
 
 	mSceneGraph->build();

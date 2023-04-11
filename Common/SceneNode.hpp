@@ -102,6 +102,7 @@ protected:
 	Game*					game;
 	RenderItem*				renderer;
 	States::ID				state;
+	std::string			mSprite;
 private:
 	XMFLOAT3				mWorldPosition;
 	XMFLOAT3				mWorldRotation;

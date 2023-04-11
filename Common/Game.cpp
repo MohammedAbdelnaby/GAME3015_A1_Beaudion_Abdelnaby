@@ -26,10 +26,7 @@ bool Game::Initialize()
 
 	registerStates();
 
-	//PushCurrentRenderState(States::Title);
-	PushCurrentRenderState(States::Game);
-	//currentStates.push_back(States::Title);
-	//currentStates.push_back(States::Game);
+	PushCurrentRenderState(States::Title);
 
 	mCamera.SetPosition(0, 5, 0);
 	mCamera.Pitch(3.14 / 2);
@@ -305,9 +302,11 @@ void Game::UpdateMainPassCB(const GameTimer& gt)
 void Game::registerStates()
 {
 	mStateStack.registerState<TitleState>(States::Title);
+	mStateStack.registerState<MainMenuState>(States::Menu);
 	mStateStack.registerState<GameState>(States::Game);
 
 	mStateStack.pushState(States::Title);
+	mStateStack.pushState(States::Menu);
 	mStateStack.pushState(States::Game);
 }
 
@@ -326,7 +325,10 @@ void Game::LoadTextures()
 	CreateTexture("Planet08", L"Textures/Planet08.dds");
 	CreateTexture("Planet09", L"Textures/Planet09.dds");
 	CreateTexture("Planet10", L"Textures/Planet010.dds");
-
+	CreateTexture("TitleScreen", L"Textures/TitleScreen.dds");
+	CreateTexture("Play", L"Textures/PlayLabel.dds");
+	CreateTexture("Exit", L"Textures/ExitLabel.dds");
+	CreateTexture("Logo", L"Textures/LogoLabel.dds");
 }
 
 void Game::CreateTexture(std::string Name, std::wstring PathName)
@@ -416,7 +418,10 @@ void Game::BuildDescriptorHeaps()
 	auto Planet8Tex = mTextures["Planet08"]->Resource;
 	auto Planet9Tex = mTextures["Planet09"]->Resource;
 	auto Planet10Tex = mTextures["Planet10"]->Resource;
-
+	auto Title = mTextures["TitleScreen"]->Resource;
+	auto Play = mTextures["Play"]->Resource;
+	auto Exit = mTextures["Exit"]->Resource;
+	auto Logo = mTextures["Logo"]->Resource;
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
 
 	//This mapping enables the shader resource view (SRV) to choose how memory gets routed to the 4 return components in a shader after a memory fetch.
@@ -486,11 +491,26 @@ void Game::BuildDescriptorHeaps()
 	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
 	srvDesc.Format = Planet9Tex->GetDesc().Format;
 	md3dDevice->CreateShaderResourceView(Planet9Tex.Get(), &srvDesc, hDescriptor);
-
+	  
 	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
 	srvDesc.Format = Planet10Tex->GetDesc().Format;
 	md3dDevice->CreateShaderResourceView(Planet10Tex.Get(), &srvDesc, hDescriptor);
 
+	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
+	srvDesc.Format = Title->GetDesc().Format;
+	md3dDevice->CreateShaderResourceView(Title.Get(), &srvDesc, hDescriptor);
+
+	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
+	srvDesc.Format = Play->GetDesc().Format;
+	md3dDevice->CreateShaderResourceView(Play.Get(), &srvDesc, hDescriptor);
+
+	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
+	srvDesc.Format = Exit->GetDesc().Format;
+	md3dDevice->CreateShaderResourceView(Exit.Get(), &srvDesc, hDescriptor);
+
+	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
+	srvDesc.Format = Logo->GetDesc().Format;
+	md3dDevice->CreateShaderResourceView(Logo.Get(), &srvDesc, hDescriptor);
 }
 
 void Game::BuildShadersAndInputLayout()
@@ -614,6 +634,10 @@ void Game::BuildMaterials()
 	CreateMaterials("Planet08", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 	CreateMaterials("Planet09", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 	CreateMaterials("Planet10", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
+	CreateMaterials("TitleScreen", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
+	CreateMaterials("Play", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
+	CreateMaterials("Exit", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
+	CreateMaterials("Logo", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 }
 
 void Game::CreateMaterials(std::string Name, XMFLOAT4 DiffuseAlbedo, XMFLOAT3 Fresnel, float Roughness)

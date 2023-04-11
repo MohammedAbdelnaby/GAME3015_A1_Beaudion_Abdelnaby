@@ -5,23 +5,18 @@
 #include "SceneNode.hpp"
 #include "SpriteNode.h"
 #include "Background.h"
-#include "CommandQueue.h"
-#include "PlayerAircraft.h"
-#include "Planets.h"
-#include "EnemyAircraft.h"
+#include "Label.h"
 
 
-class GameState : public State
+class MainMenuState : public State
 {
 public:
-	GameState(StateStack& stack, Context context);
+	MainMenuState(StateStack& stack, Context context);
 
 	void		buildState();
 	void		draw();
 	bool		update(const GameTimer& dt);
 	bool		handleEvent(Command& event);
-	CommandQueue& getCommandQueue();
-	void								processInput();
 
 
 private:
@@ -32,13 +27,15 @@ private:
 		LAYER_COUNT
 	};
 	Game* mGame;
+
 	SceneNode* mSceneGraph;
 	std::array<SceneNode*, LAYER_COUNT>	mSceneLayers;
-	CommandQueue						mCommandQueue;
+
 	XMFLOAT4							mWorldBounds;
-	XMFLOAT2		    				mSpawnPosition;
-	PlayerAircraft* mPlayerAircraft;
 	Background* mBackground;
-	std::list<Planets*>					mPlanets;
-	std::list<EnemyAircraft*>			mEnemies;
+	Label* mLogoLabel;
+	Label* mPlayLabel;
+	Label* mExitLabel;
+
+	// Inherited via State
 };

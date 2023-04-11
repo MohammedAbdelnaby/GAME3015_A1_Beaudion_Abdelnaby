@@ -7,6 +7,7 @@
 #include "StateStack.h"
 #include "TitleState.h"
 #include "GameState.h"
+#include "MainMenuState.h"
 
 class Game : public D3DApp
 {

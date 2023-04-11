@@ -5,7 +5,7 @@
 #include "SceneNode.hpp"
 #include "SpriteNode.h"
 #include "Background.h"
-#include "CommandQueue.h"
+#include "Label.h"
 
 
 class TitleState : public State
@@ -30,10 +30,10 @@ private:
 
 	SceneNode* mSceneGraph;
 	std::array<SceneNode*, LAYER_COUNT>	mSceneLayers;
-	CommandQueue						mCommandQueue;
 
 	XMFLOAT4							mWorldBounds;
 	Background* mBackground;
+	Label* mLabel;
 
 	// Inherited via State
 };
