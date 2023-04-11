@@ -17,16 +17,6 @@ void PauseState::draw()
 
 bool PauseState::update(const GameTimer& dt)
 {
-	if (!IsSatesPlaying())
-	{
-		return true;
-	}
-	mSceneGraph->update(dt);
-	if (GetAsyncKeyState(' ') & 0x8000)
-	{
-		mGame->PopCurrentRenderState();
-		mGame->PushCurrentRenderState(States::Menu);
-	}
 	return true;
 }
 

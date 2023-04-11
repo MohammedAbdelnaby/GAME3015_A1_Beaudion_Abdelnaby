@@ -37,6 +37,13 @@ bool GameState::update(const GameTimer& dt)
 	}
 	if (IsPaused)
 	{
+		if (GetAsyncKeyState('M') & 0x8000)
+		{
+			mGame->PopCurrentRenderState();
+			mGame->PopCurrentRenderState();
+			mGame->PushCurrentRenderState(States::Menu);
+			IsPaused = false;
+		}
 		return true;
 	}
 	mPlayerAircraft->setVelocity(0.f, 0.f, 0.f);
