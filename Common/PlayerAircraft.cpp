@@ -1,6 +1,6 @@
 #include "PlayerAircraft.h"
 
-PlayerAircraft::PlayerAircraft(Game* game) : Aircraft(game)
+PlayerAircraft::PlayerAircraft(Game* game, States::ID id) : Aircraft(game, id)
 {
 	mSprite = "Player";
 	mKeyBinding['W'] = MoveUp;

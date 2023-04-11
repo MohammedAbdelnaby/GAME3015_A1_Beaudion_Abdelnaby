@@ -6,7 +6,7 @@ class EnemyAircraft :
     public Aircraft
 {
 public:
-    EnemyAircraft(Game* game);
+    EnemyAircraft(Game* game, States::ID id);
 private:
     void		updateCurrent(const GameTimer& gt) override;
     void		drawCurrent() const;

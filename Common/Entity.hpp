@@ -10,7 +10,7 @@ class Entity :
     public SceneNode
 {
 public:
-	Entity(Game* game);
+	Entity(Game* game, States::ID id);
 	void				setVelocity(XMFLOAT3 velocity);
 	void				setVelocity(float vx, float vy, float vz);
 	XMFLOAT3			getVelocity() const;

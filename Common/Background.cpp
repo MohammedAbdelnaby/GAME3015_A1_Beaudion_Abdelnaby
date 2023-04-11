@@ -1,6 +1,6 @@
 #include "Background.h"
 
-Background::Background(Game* game): SpriteNode(game)
+Background::Background(Game* game, States::ID id): SpriteNode(game, id)
 , mScrollSpeed(1.0f)
 {
 	mSprite = "Background";

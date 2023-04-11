@@ -1,14 +1,12 @@
+#pragma once
 #include "State.h"
 #include "StateStack.h"
 #include "Background.h"
 #include "SceneNode.hpp"
-#include "Aircraft.hpp"
-#include "PlayerAircraft.h"
-#include "EnemyAircraft.h"
 #include "SpriteNode.h"
 #include "Background.h"
-#include "Planets.h"
 #include "CommandQueue.h"
+
 
 class TitleState : public State
 {
@@ -35,11 +33,7 @@ private:
 	CommandQueue						mCommandQueue;
 
 	XMFLOAT4							mWorldBounds;
-	XMFLOAT2		    				mSpawnPosition;
-	PlayerAircraft* mPlayerAircraft;
 	Background* mBackground;
-	std::list<Planets*>					mPlanets;
-	std::list<EnemyAircraft*>			mEnemies;
 
 	// Inherited via State
 };

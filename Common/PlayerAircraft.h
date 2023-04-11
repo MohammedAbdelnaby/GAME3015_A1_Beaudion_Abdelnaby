@@ -15,7 +15,7 @@ public:
         MoveRight,
         MoveLeft
     };
-    PlayerAircraft(Game* game);
+    PlayerAircraft(Game* game, States::ID id);
 private:
     void		 updateCurrent(const GameTimer& gt) override;
     unsigned int getCategory() override;

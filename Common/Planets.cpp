@@ -2,7 +2,7 @@
 #include <time.h>
 
 
-Planets::Planets(Game* game) : SpriteNode(game)
+Planets::Planets(Game* game, States::ID id) : SpriteNode(game, id)
 , mScrollSpeed(1.0f)
 {
 	mSprite = PlanetsNames[rand() % PlanetsNames->length()];

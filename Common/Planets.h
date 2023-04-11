@@ -6,7 +6,7 @@ class Planets
 	:public SpriteNode
 {
 public:
-    Planets(Game* game);
+    Planets(Game* game, States::ID id);
 private:
     void		updateCurrent(const GameTimer& gt) override;
     void		drawCurrent() const;

@@ -13,7 +13,7 @@ class Aircraft :
 public:
 
 public:
-	Aircraft(Game* game);
+	Aircraft(Game* game, States::ID id);
 
 
 public:

@@ -175,9 +175,6 @@
     <ClInclude Include="Common\EnemyAircraft.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="Planets.h">
-      <Filter>GameObjects</Filter>
-    </ClInclude>
     <ClInclude Include="Common\Category.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -201,6 +198,9 @@
     </ClInclude>
     <ClInclude Include="Common\TitleState.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Planets.h">
+      <Filter>GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

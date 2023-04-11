@@ -1,6 +1,6 @@
 #include "EnemyAircraft.h"
 
-EnemyAircraft::EnemyAircraft(Game* game) : Aircraft(game),
+EnemyAircraft::EnemyAircraft(Game* game, States::ID id) : Aircraft(game, id),
  mEnemySpeed(5)
 {
 	mSprite = "Enemy";

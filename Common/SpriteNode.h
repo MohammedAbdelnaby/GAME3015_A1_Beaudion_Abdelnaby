@@ -5,7 +5,7 @@ class SpriteNode :
     public Entity
 {
 public:
-	SpriteNode(Game* game);
+	SpriteNode(Game* game, States::ID id);
 
 protected:
 	std::string			mSprite;

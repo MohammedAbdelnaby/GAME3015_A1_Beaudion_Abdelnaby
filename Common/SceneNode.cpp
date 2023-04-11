@@ -7,10 +7,11 @@
 #include "Game.hpp"
 
 
-SceneNode::SceneNode(Game* game)
+SceneNode::SceneNode(Game* game, States::ID id)
 	: mChildren()
 	, mParent(nullptr)
 	, game(game)
+	,state(id)
 {
 	mWorldPosition = XMFLOAT3(0, 0, 0);
 	mWorldScaling = XMFLOAT3(1, 1, 1);
@@ -89,6 +90,11 @@ void SceneNode::buildChildren()
 	{
 		child->build();
 	}
+}
+
+States::ID SceneNode::getStateID()
+{
+	return state;
 }
 
 XMFLOAT3 SceneNode::getWorldPosition() const

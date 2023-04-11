@@ -14,7 +14,7 @@ public:
 	Game(const Game& rhs) = delete;
 	Game& operator=(const Game& rhs) = delete;
 	~Game();
-
+	void SetCurrentState(States::ID id);
 	virtual bool Initialize()override;
 private:
 	virtual void OnResize()override;
@@ -102,6 +102,7 @@ private:
 
 	// States
 	StateStack mStateStack;
+	States::ID currentStates;
 
 public:
 	std::vector<std::unique_ptr<RenderItem>>& getRenderItems() { return mAllRitems; }

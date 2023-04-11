@@ -6,7 +6,7 @@ class Background :
     public SpriteNode
 {
 public:
-    Background(Game* game);
+    Background(Game* game, States::ID id);
 private:
     void		updateCurrent(const GameTimer& gt) override;
     void		drawCurrent() const;

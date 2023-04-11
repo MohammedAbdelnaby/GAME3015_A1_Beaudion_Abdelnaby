@@ -12,6 +12,7 @@
 #include "FrameResource.h"
 #include "Category.h"
 #include "Command.h"
+#include "StateIdentifiers.h"
 
 using Microsoft::WRL::ComPtr;
 using namespace DirectX;
@@ -44,7 +45,7 @@ struct RenderItem
 
 	Material* Mat = nullptr;
 	MeshGeometry* Geo = nullptr;
-
+	States::ID StateID;
 	// Primitive topology.
 	D3D12_PRIMITIVE_TOPOLOGY PrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 
@@ -63,7 +64,7 @@ public:
 
 
 public:
-	SceneNode(Game* game);
+	SceneNode(Game* game, States::ID id);
 
 	void					attachChild(Ptr child);
 	Ptr						detachChild(const SceneNode& node);
@@ -94,10 +95,11 @@ private:
 	void					drawChildren() const;
 	virtual void			buildCurrent();
 	void					buildChildren();
-
+	States::ID				getStateID();
 protected:
 	Game*					game;
 	RenderItem*				renderer;
+	States::ID				state;
 private:
 	XMFLOAT3				mWorldPosition;
 	XMFLOAT3				mWorldRotation;
