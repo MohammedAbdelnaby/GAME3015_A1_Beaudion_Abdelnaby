@@ -304,10 +304,13 @@ void Game::registerStates()
 	mStateStack.registerState<TitleState>(States::Title);
 	mStateStack.registerState<MainMenuState>(States::Menu);
 	mStateStack.registerState<GameState>(States::Game);
+	mStateStack.registerState<PauseState>(States::Pause);
+
 
 	mStateStack.pushState(States::Title);
 	mStateStack.pushState(States::Menu);
 	mStateStack.pushState(States::Game);
+	mStateStack.pushState(States::Pause);
 }
 
 void Game::LoadTextures()
@@ -329,6 +332,7 @@ void Game::LoadTextures()
 	CreateTexture("Play", L"Textures/PlayLabel.dds");
 	CreateTexture("Exit", L"Textures/ExitLabel.dds");
 	CreateTexture("Logo", L"Textures/LogoLabel.dds");
+	CreateTexture("Pause", L"Textures/PauseLabel.dds");
 }
 
 void Game::CreateTexture(std::string Name, std::wstring PathName)
@@ -422,6 +426,7 @@ void Game::BuildDescriptorHeaps()
 	auto Play = mTextures["Play"]->Resource;
 	auto Exit = mTextures["Exit"]->Resource;
 	auto Logo = mTextures["Logo"]->Resource;
+	auto Pause = mTextures["Pause"]->Resource;
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
 
 	//This mapping enables the shader resource view (SRV) to choose how memory gets routed to the 4 return components in a shader after a memory fetch.
@@ -511,6 +516,10 @@ void Game::BuildDescriptorHeaps()
 	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
 	srvDesc.Format = Logo->GetDesc().Format;
 	md3dDevice->CreateShaderResourceView(Logo.Get(), &srvDesc, hDescriptor);
+
+	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
+	srvDesc.Format = Pause->GetDesc().Format;
+	md3dDevice->CreateShaderResourceView(Pause.Get(), &srvDesc, hDescriptor);
 }
 
 void Game::BuildShadersAndInputLayout()
@@ -638,6 +647,7 @@ void Game::BuildMaterials()
 	CreateMaterials("Play", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 	CreateMaterials("Exit", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 	CreateMaterials("Logo", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
+	CreateMaterials("Pause", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 }
 
 void Game::CreateMaterials(std::string Name, XMFLOAT4 DiffuseAlbedo, XMFLOAT3 Fresnel, float Roughness)
@@ -711,6 +721,11 @@ void Game::PushCurrentRenderState(States::ID id)
 void Game::PopCurrentRenderState()
 {
 	currentStates.pop_back();
+}
+
+std::vector<States::ID> Game::GetCurrentState()
+{
+	return currentStates;
 }
 
 //step21

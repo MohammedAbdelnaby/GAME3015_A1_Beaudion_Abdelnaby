@@ -4,14 +4,13 @@
 #include "Background.h"
 #include "SceneNode.hpp"
 #include "SpriteNode.h"
-#include "Background.h"
 #include "Label.h"
 
 
-class MainMenuState : public State
+class PauseState : public State
 {
 public:
-	MainMenuState(StateStack& stack, Context context);
+	PauseState(StateStack& stack, Context context);
 
 	void		buildState();
 	void		draw();
@@ -28,15 +27,10 @@ private:
 		LAYER_COUNT
 	};
 	Game* mGame;
-
+	States::ID mState;
 	SceneNode* mSceneGraph;
 	std::array<SceneNode*, LAYER_COUNT>	mSceneLayers;
-	States::ID mState;
-	XMFLOAT4							mWorldBounds;
-	Background* mBackground;
-	Label* mLogoLabel;
-	Label* mPlayLabel;
-	Label* mExitLabel;
+	Label* mLabel;
 
 	// Inherited via State
 };

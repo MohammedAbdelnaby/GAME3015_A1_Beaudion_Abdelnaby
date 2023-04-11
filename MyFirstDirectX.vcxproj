@@ -60,6 +60,7 @@
     <ClCompile Include="Common\main.cpp" />
     <ClCompile Include="Common\MainMenuState.cpp" />
     <ClCompile Include="Common\MathHelper.cpp" />
+    <ClCompile Include="Common\PauseState.cpp" />
     <ClCompile Include="Common\Planets.cpp" />
     <ClCompile Include="Common\PlayerAircraft.cpp" />
     <ClCompile Include="Common\SceneNode.cpp" />
@@ -90,6 +91,7 @@
     <ClInclude Include="Common\Label.h" />
     <ClInclude Include="Common\MainMenuState.h" />
     <ClInclude Include="Common\MathHelper.h" />
+    <ClInclude Include="Common\PauseState.h" />
     <ClInclude Include="Common\Planets.h" />
     <ClInclude Include="Common\PlayerAircraft.h" />
     <ClInclude Include="Common\ResourceIdentifiers.h" />

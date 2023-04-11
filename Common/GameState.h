@@ -25,6 +25,7 @@ public:
 
 
 private:
+	bool IsSatesPlaying();
 	enum Layer
 	{
 		BACKGROUND,
@@ -33,6 +34,8 @@ private:
 	};
 	Game* mGame;
 	SceneNode* mSceneGraph;
+	States::ID mState;
+	bool IsPaused;
 	std::array<SceneNode*, LAYER_COUNT>	mSceneLayers;
 	CommandQueue						mCommandQueue;
 	XMFLOAT4							mWorldBounds;

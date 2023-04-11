@@ -8,6 +8,7 @@
 #include "TitleState.h"
 #include "GameState.h"
 #include "MainMenuState.h"
+#include "PauseState.h"
 
 class Game : public D3DApp
 {
@@ -19,7 +20,7 @@ public:
 
 	void PushCurrentRenderState(States::ID id);
 	void PopCurrentRenderState();
-
+	std::vector<States::ID> GetCurrentState();
 	virtual bool Initialize()override;
 private:
 	virtual void OnResize()override;

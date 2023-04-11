@@ -25,6 +25,9 @@
     <Filter Include="Scenes">
       <UniqueIdentifier>{bd471d15-7d32-4702-b0cd-42b3afa8c022}</UniqueIdentifier>
     </Filter>
+    <Filter Include="States">
+      <UniqueIdentifier>{39cad307-9b89-432c-99d6-a2b28117af2e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\color.hlsl">
@@ -113,17 +116,20 @@
     <ClCompile Include="Common\StateStack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Common\TitleState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\GameState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Label.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="Common\GameState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\TitleState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
     <ClCompile Include="Common\MainMenuState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\PauseState.cpp">
+      <Filter>States</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -196,14 +202,8 @@
     <ClInclude Include="Common\StateStack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Common\TitleState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Common\Planets.h">
       <Filter>GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\GameState.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Common\StateIdentifiers.h">
       <Filter>Header Files</Filter>
@@ -217,8 +217,17 @@
     <ClInclude Include="Common\Label.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
+    <ClInclude Include="Common\TitleState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\GameState.h">
+      <Filter>States</Filter>
+    </ClInclude>
     <ClInclude Include="Common\MainMenuState.h">
-      <Filter>Header Files</Filter>
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\PauseState.h">
+      <Filter>States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

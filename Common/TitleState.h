@@ -20,6 +20,7 @@ public:
 
 
 private:
+	bool IsSatesPlaying();
 	enum Layer
 	{
 		BACKGROUND,
@@ -27,7 +28,7 @@ private:
 		LAYER_COUNT
 	};
 	Game* mGame;
-
+	States::ID mState;
 	SceneNode* mSceneGraph;
 	std::array<SceneNode*, LAYER_COUNT>	mSceneLayers;
 
