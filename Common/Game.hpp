@@ -6,6 +6,7 @@
 #include "World.hpp"
 #include "StateStack.h"
 #include "TitleState.h"
+#include "GameState.h"
 
 class Game : public D3DApp
 {
@@ -14,7 +15,10 @@ public:
 	Game(const Game& rhs) = delete;
 	Game& operator=(const Game& rhs) = delete;
 	~Game();
-	void SetCurrentState(States::ID id);
+
+	void PushCurrentRenderState(States::ID id);
+	void PopCurrentRenderState();
+
 	virtual bool Initialize()override;
 private:
 	virtual void OnResize()override;
@@ -102,7 +106,7 @@ private:
 
 	// States
 	StateStack mStateStack;
-	States::ID currentStates;
+	std::vector<States::ID> currentStates;
 
 public:
 	std::vector<std::unique_ptr<RenderItem>>& getRenderItems() { return mAllRitems; }

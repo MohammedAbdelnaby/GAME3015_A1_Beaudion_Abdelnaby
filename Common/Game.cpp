@@ -23,9 +23,14 @@ bool Game::Initialize()
 {
 	if (!D3DApp::Initialize())
 		return false;
-	currentStates = States::Title;
+
 	registerStates();
-	mStateStack.pushState(States::Title);
+
+	//PushCurrentRenderState(States::Title);
+	PushCurrentRenderState(States::Game);
+	//currentStates.push_back(States::Title);
+	//currentStates.push_back(States::Game);
+
 	mCamera.SetPosition(0, 5, 0);
 	mCamera.Pitch(3.14 / 2);
 
@@ -300,6 +305,10 @@ void Game::UpdateMainPassCB(const GameTimer& gt)
 void Game::registerStates()
 {
 	mStateStack.registerState<TitleState>(States::Title);
+	mStateStack.registerState<GameState>(States::Game);
+
+	mStateStack.pushState(States::Title);
+	mStateStack.pushState(States::Game);
 }
 
 void Game::LoadTextures()
@@ -640,33 +649,44 @@ void Game::DrawRenderItems(ID3D12GraphicsCommandList* cmdList, const std::vector
 	for (size_t i = 0; i < ritems.size(); ++i)
 	{
 		auto ri = ritems[i];
-		if (ri->StateID == currentStates)
+		ri->isVisible = false;
+		for (size_t j = 0; j < currentStates.size(); ++j)
 		{
-
-			cmdList->IASetVertexBuffers(0, 1, &ri->Geo->VertexBufferView());
-			cmdList->IASetIndexBuffer(&ri->Geo->IndexBufferView());
-			cmdList->IASetPrimitiveTopology(ri->PrimitiveType);
-
-			//step18
-			CD3DX12_GPU_DESCRIPTOR_HANDLE tex(mSrvDescriptorHeap->GetGPUDescriptorHandleForHeapStart());
-			tex.Offset(ri->Mat->DiffuseSrvHeapIndex, mCbvSrvDescriptorSize);
-
-			D3D12_GPU_VIRTUAL_ADDRESS objCBAddress = objectCB->GetGPUVirtualAddress() + ri->ObjCBIndex * objCBByteSize;
-			D3D12_GPU_VIRTUAL_ADDRESS matCBAddress = matCB->GetGPUVirtualAddress() + ri->Mat->MatCBIndex * matCBByteSize;
-
-			//step19
-			cmdList->SetGraphicsRootDescriptorTable(0, tex);
-			cmdList->SetGraphicsRootConstantBufferView(1, objCBAddress);
-			cmdList->SetGraphicsRootConstantBufferView(3, matCBAddress);
-
-			cmdList->DrawIndexedInstanced(ri->IndexCount, 1, ri->StartIndexLocation, ri->BaseVertexLocation, 0);
+			if (ri->StateID == currentStates[j])
+				ri->isVisible = true;
 		}
+		if (!ri->isVisible)
+			continue;
+
+		cmdList->IASetVertexBuffers(0, 1, &ri->Geo->VertexBufferView());
+		cmdList->IASetIndexBuffer(&ri->Geo->IndexBufferView());
+		cmdList->IASetPrimitiveTopology(ri->PrimitiveType);
+
+		//step18
+		CD3DX12_GPU_DESCRIPTOR_HANDLE tex(mSrvDescriptorHeap->GetGPUDescriptorHandleForHeapStart());
+		tex.Offset(ri->Mat->DiffuseSrvHeapIndex, mCbvSrvDescriptorSize);
+
+		D3D12_GPU_VIRTUAL_ADDRESS objCBAddress = objectCB->GetGPUVirtualAddress() + ri->ObjCBIndex * objCBByteSize;
+		D3D12_GPU_VIRTUAL_ADDRESS matCBAddress = matCB->GetGPUVirtualAddress() + ri->Mat->MatCBIndex * matCBByteSize;
+
+		//step19
+		cmdList->SetGraphicsRootDescriptorTable(0, tex);
+		cmdList->SetGraphicsRootConstantBufferView(1, objCBAddress);
+		cmdList->SetGraphicsRootConstantBufferView(3, matCBAddress);
+
+		cmdList->DrawIndexedInstanced(ri->IndexCount, 1, ri->StartIndexLocation, ri->BaseVertexLocation, 0);
+
 	}
 }
 
-void Game::SetCurrentState(States::ID id)
+void Game::PushCurrentRenderState(States::ID id)
 {
-	currentStates = id;
+	currentStates.push_back(id);
+}
+
+void Game::PopCurrentRenderState()
+{
+	currentStates.pop_back();
 }
 
 //step21

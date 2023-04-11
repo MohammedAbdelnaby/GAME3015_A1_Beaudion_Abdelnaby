@@ -21,7 +21,8 @@ bool TitleState::update(const GameTimer& dt)
 	mSceneGraph->update(dt);
 	if (GetAsyncKeyState('S') & 0x8000)
 	{
-		mGame->SetCurrentState(States::Game);
+		mGame->PopCurrentRenderState();
+		mGame->PushCurrentRenderState(States::Game);
 	}
 	return true;
 }

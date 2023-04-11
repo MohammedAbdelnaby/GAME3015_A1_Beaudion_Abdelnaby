@@ -116,6 +116,9 @@
     <ClCompile Include="Common\TitleState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Common\GameState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Aircraft.hpp">
@@ -201,6 +204,9 @@
     </ClInclude>
     <ClInclude Include="Common\Planets.h">
       <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\GameState.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

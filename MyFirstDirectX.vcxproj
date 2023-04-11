@@ -53,6 +53,7 @@
     <ClCompile Include="Common\Entity.cpp" />
     <ClCompile Include="Common\FrameResource.cpp" />
     <ClCompile Include="Common\Game.cpp" />
+    <ClCompile Include="Common\GameState.cpp" />
     <ClCompile Include="Common\GameTimer.cpp" />
     <ClCompile Include="Common\GeometryGenerator.cpp" />
     <ClCompile Include="Common\main.cpp" />
@@ -81,6 +82,7 @@
     <ClInclude Include="Common\Entity.hpp" />
     <ClInclude Include="Common\FrameResource.h" />
     <ClInclude Include="Common\Game.hpp" />
+    <ClInclude Include="Common\GameState.h" />
     <ClInclude Include="Common\GameTimer.h" />
     <ClInclude Include="Common\GeometryGenerator.h" />
     <ClInclude Include="Common\MathHelper.h" />
